@@ -2,25 +2,17 @@
 
 import { useState } from 'react';
 
-import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
-import { OrderModalContent } from '~/components/modals/OrderModalContent';
-import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
-import { balanceQueries, collectableQueries } from '~/lib/queries';
-import {
-  MarketplaceKind,
-  type Order,
-  OrderSide,
-} from '~/lib/queries/marketplace/marketplace.gen';
-import { _addToCart_ } from '~/lib/stores/cart/Cart';
-import { OrderItemType } from '~/lib/stores/cart/types';
-import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
-import { type OrderbookOrder } from '@0xsequence/indexer';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
+import {
+  useCurrencies,
+  useHighestOffer,
+  useLowestListing,
+  useTokenBalances,
+} from '@0xsequence/marketplace-sdk/react';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -36,40 +28,39 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  const { currencies } = useCollectionCurrencies({
-    chainId: chainId,
-    collectionId: collectionAddress,
+  const { data: currencies } = useCurrencies({
+    chainId,
+    collectionAddress,
   });
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
-  const { data: bestOffers, isLoading: isLoadingBestOffers } = useQuery({
-    ...collectableQueries.highestOffer({
+  const { data: bestOffers, isLoading: isLoadingBestOffers } = useHighestOffer({
+    chainId: String(chainId),
+    collectionAddress,
+    tokenId: tokenId,
+    filter: {
+      marketplace: [MarketplaceKind.sequence_marketplace_v1],
+      currencies: currencyAddresses,
+    },
+    query: {
+      enabled: !!currencies,
+    },
+  });
+
+  const { data: bestListings, isLoading: isLoadingBestListings } =
+    useLowestListing({
       chainId,
-      contractAddress: collectionAddress,
-      tokenId: tokenId,
+      collectionAddress,
+      tokenId,
       filter: {
         marketplace: [MarketplaceKind.sequence_marketplace_v1],
       },
-    }),
-    enabled: !!currencies,
-  });
-
-  const bestOffer = getOrderbookOrder(bestOffers?.order);
-
-  const { data: bestListings, isLoading: isLoadingBestListings } = useQuery({
-    ...collectableQueries.lowestListing({
-      chainId,
-      contractAddress: collectionAddress,
-      tokenId: tokenId,
-      filter: {
-        marketplace: [MarketplaceKind.sequence_marketplace_v1],
+      query: {
+        enabled: !!currencies,
       },
-    }),
-    enabled: !!currencies,
-  });
+    });
 
-  const bestListing = getOrderbookOrder(bestListings?.order);
   const { collectionMetadata, collectibleMetadata } = useCollectableData();
 
   const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
@@ -77,15 +68,15 @@ export const CollectibleTradeActions = ({
   const { address, isConnected } = useAccount();
 
   const { data: userBalanceResp, isLoading: isBalanceLoading } =
-    useInfiniteQuery({
-      ...balanceQueries.list({
-        chainId: chainId,
-        contractAddress: collectionAddress,
-        tokenId,
-        includeMetadata: false,
-        accountAddress: address as string,
-      }),
-      enabled: !!isConnected && !!address,
+    useTokenBalances({
+      chainId: chainId,
+      contractAddress: collectionAddress,
+      tokenId,
+      includeMetadata: false,
+      accountAddress: address as string,
+      query: {
+        enabled: !!isConnected && !!address,
+      },
     });
 
   const userBalance = userBalanceResp?.pages?.[0]?.balances[0]?.balance;
@@ -98,65 +89,19 @@ export const CollectibleTradeActions = ({
     (isConnected && isBalanceLoading);
 
   const onClickBuy = () => {
-    if (!bestListing || !bestListings) return;
-    _addToCart_({
-      item: {
-        chainId,
-        itemType: OrderItemType.BUY,
-        collectibleMetadata: {
-          collectionAddress: bestListings.order.collectionContractAddress,
-          tokenId: bestListing.tokenId,
-          name: collectibleMetadata.data?.name || '',
-          imageUrl: collectibleMetadata.data?.image || '',
-          decimals: collectibleMetadata.data?.decimals || 0,
-          chainId,
-        },
-        quantity: defaultSelectionQuantity({
-          type: OrderItemType.BUY,
-          tokenDecimals: collectibleMetadata.data?.decimals || 0,
-          tokenUserBalance: BigInt(0),
-          tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
-        }),
-        orderId: bestListing.orderId,
-      },
-      options: {
-        toggle: true,
-      },
-    });
+    if (!bestListings || !bestListings) return;
+    //TODO: buy
   };
 
   const onClickSell = () => {
-    if (!bestOffer || !bestOffers || !userBalance) return;
-    _addToCart_({
-      item: {
-        chainId,
-        itemType: OrderItemType.SELL,
-        collectibleMetadata: {
-          collectionAddress: bestOffers.order.collectionContractAddress,
-          tokenId: bestOffer.tokenId,
-          name: collectibleMetadata.data?.name || '',
-          imageUrl: collectibleMetadata.data?.image || '',
-          decimals: collectibleMetadata.data?.decimals || 0,
-          chainId,
-        },
-        quantity: defaultSelectionQuantity({
-          type: OrderItemType.SELL,
-          tokenDecimals: collectibleMetadata.data?.decimals || 0,
-          tokenUserBalance: BigInt(userBalance?.toString() || 0),
-          tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
-        }),
-        orderId: bestOffer.orderId,
-      },
-      options: {
-        toggle: true,
-      },
-    });
+    if (!bestOffers || !userBalance) return;
+    //todo sell
   };
 
-  const buyDisabled = !bestListing || item721AlreadyOwned;
+  const buyDisabled = !bestListings || item721AlreadyOwned;
   const offerDisabled = !isConnected;
   const listingDisabled = !isConnected || !userBalance;
-  const sellDisabled = !bestOffer || !userBalance;
+  const sellDisabled = !bestOffers || !userBalance;
 
   return (
     <Flex className="flex-col gap-4">
@@ -192,15 +137,15 @@ export const CollectibleTradeActions = ({
               onOpenAutoFocus={(e) => e.preventDefault()}
             >
               <Dialog.Title>Create an offer</Dialog.Title>
-              <OrderModalContent
-                chainId={chainId}
-                collectionAddress={collectionAddress}
-                tokenId={tokenId}
-                bestOrder={bestListing}
-                open={isOfferModalOpen}
-                setOpen={setIsOfferModalOpen}
-                type="offer"
-              />
+              {/* <OrderModalContent */}
+              {/*   chainId={chainId} */}
+              {/*   collectionAddress={collectionAddress} */}
+              {/*   tokenId={tokenId} */}
+              {/*   bestOrder={bestListing} */}
+              {/*   open={isOfferModalOpen} */}
+              {/*   setOpen={setIsOfferModalOpen} */}
+              {/*   type="offer" */}
+              {/* /> */}
             </Dialog.BaseContent>
           </Dialog.Root>
         </Flex>
@@ -241,15 +186,15 @@ export const CollectibleTradeActions = ({
                 <Flex className="h-full w-full flex-col gap-4 p-5">
                   <Dialog.Title>Make a listing</Dialog.Title>
 
-                  <OrderModalContent
-                    chainId={chainId}
-                    collectionAddress={collectionAddress}
-                    tokenId={tokenId}
-                    bestOrder={bestOffer}
-                    open={isListingModalOpen}
-                    setOpen={setIsListingModalOpen}
-                    type="listing"
-                  />
+                  {/* <OrderModalContent */}
+                  {/*   chainId={chainId} */}
+                  {/*   collectionAddress={collectionAddress} */}
+                  {/*   tokenId={tokenId} */}
+                  {/*   bestOrder={bestOffer} */}
+                  {/*   open={isListingModalOpen} */}
+                  {/*   setOpen={setIsListingModalOpen} */}
+                  {/*   type="listing" */}
+                  {/* /> */}
                 </Flex>
               </ScrollArea.Base>
             </Dialog.BaseContent>
@@ -258,24 +203,4 @@ export const CollectibleTradeActions = ({
       </Flex>
     </Flex>
   );
-};
-
-const getOrderbookOrder = (order?: Order) => {
-  if (!order) return undefined;
-  //TODO, unify Order and OrderbookOrder
-  return {
-    orderId: order.orderId,
-    tokenContract: order.collectionContractAddress,
-    tokenId: order.tokenId,
-    isListing: order.side === OrderSide.listing,
-    quantity: order.quantityInitial,
-    quantityRemaining: order.quantityRemaining,
-    currencyAddress: order.priceCurrencyAddress,
-    pricePerToken: order.priceAmount,
-    expiry: order.validUntil,
-    orderStatus: getOrderStatus(order.status),
-    createdBy: order.createdBy,
-    createdAt: Math.round(new Date(order.createdAt).getTime() / 1000),
-    orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-  } satisfies OrderbookOrder;
 };

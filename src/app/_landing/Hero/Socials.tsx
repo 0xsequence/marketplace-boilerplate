@@ -1,6 +1,6 @@
 'use client';
 
-import { type MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 } from '$ui';
 
 type SocialsProps = {
-  socials: MarketConfig['socials'];
+  socials: MarketplaceConfig['socials'];
   className?: string;
 };
 

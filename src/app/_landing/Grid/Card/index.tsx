@@ -2,20 +2,23 @@
 
 import { Suspense } from 'react';
 
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
-import { type MarketConfig } from '~/config/marketplace';
-import { collectionQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
 import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
+import { NetworkImage } from '@0xsequence/design-system';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import {
+  collectionOptions,
+  useConfig,
+} from '@0xsequence/marketplace-sdk/react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
 
-type CollectionCard = MarketConfig['collections'][0];
+type CollectionCard = MarketplaceConfig['collections'][number];
 
 export const CollectionCard = (params: CollectionCard) => {
   return (
@@ -27,10 +30,13 @@ export const CollectionCard = (params: CollectionCard) => {
 
 const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const { data } = useSuspenseQuery(
-    collectionQueries.detail({
-      collectionId: collectionAddress,
-      chainID: chainId.toString(),
-    }),
+    collectionOptions(
+      {
+        collectionAddress,
+        chainId: chainId.toString(),
+      },
+      useConfig(),
+    ),
   );
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
@@ -90,7 +96,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
               {name}
             </Text>
 
-            <NetworkIcon size="xs" chainId={chainId} />
+            <NetworkImage size="xs" chainId={chainId} />
           </Flex>
 
           <Text
