@@ -10,6 +10,7 @@ import {
   type GetCollectibleHighestOfferArgs,
   type GetCollectibleLowestListingArgs,
   type SyncOrdersArgs,
+  type CheckoutOptionsMarketplaceArgs
 } from './marketplace/marketplace.gen';
 import type { GetTopOrdersArgs } from './marketplace/oldMarketplace.gen';
 import type { GetTokenBalancesArgs } from '@0xsequence/indexer';
@@ -151,4 +152,9 @@ export const fetchCurrencies = (args: { chainId: number }) => {
 export const fetchSyncOrders = (args: SyncOrdersArgs & { chainId: number }) => {
   const marketplace = getMarketplaceClient(args.chainId);
   return marketplace.syncOrders(args);
+};
+
+export const fetchCheckoutOptionsMarketplace = (args: CheckoutOptionsMarketplaceArgs & { chainId: number }) => {
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.checkoutOptionsMarketplace(args);
 };

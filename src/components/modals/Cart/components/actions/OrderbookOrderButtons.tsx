@@ -6,19 +6,22 @@ import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { getChain } from '~/config/networks';
-import { env } from '~/env';
 import type { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
+import { useCheckoutOptionsMarketplace } from '~/hooks/transactions/useCheckoutOptionsMarketplace';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import { useCountryCode } from '~/hooks/useCountryCode';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
 import {
   balanceQueries,
   collectableQueries,
   collectionQueries,
 } from '~/lib/queries';
+import {
+  MarketplaceKind,
+  TransactionSwapProvider,
+} from '~/lib/queries/marketplace/marketplace.gen';
 import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 import {
   onTransactionFinish,
@@ -27,26 +30,18 @@ import {
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 import {
-  checkCountryCodeValidity,
-  checkCurrencyValidity,
-} from '~/lib/utils/sardine';
-import {
   type GenericStep,
   generateStepsOrderbookAcceptRequest,
   type AcceptRequest,
 } from '~/lib/utils/txBundler';
 
-import { Button, Text, Box, toast } from '$ui';
+import { Button, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
-import type { CheckoutSettings } from '@0xsequence/kit-checkout';
-import {
-  useCheckoutModal,
-  useCheckoutWhitelistStatus,
-} from '@0xsequence/kit-checkout';
+import { useSelectPaymentModal } from '@0xsequence/kit-checkout';
 import { useQueryClient } from '@tanstack/react-query';
 import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
+import { useAccount, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -72,8 +67,6 @@ interface OrderbookOrderButtonsProps {
 export const OrderbookOrderButtons = ({
   orders,
   erc20Amount,
-  erc20Symbol,
-  erc20Decimals,
   erc20Address,
   platformFee,
   frontEndFeeRecipient,
@@ -91,8 +84,7 @@ export const OrderbookOrderButtons = ({
 
   const { address: userAddress, isConnected, connector } = useAccount();
   const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient();
-  const { triggerCheckout } = useCheckoutModal();
+  const { openSelectPaymentModal } = useSelectPaymentModal();
 
   const { networkMismatch, targetChainId } = useNetworkSwitch({
     targetChainId: chainId,
@@ -146,16 +138,24 @@ export const OrderbookOrderButtons = ({
     disabled: !erc1155ApprovalEnabled,
   });
 
-  const { data: countryCodeData } = useCountryCode();
+  const disabledCheckoutOptionsQuery = cartType !== OrderItemType.BUY;
 
-  // To test sardine integration on localhost, set isDev to true
-  const isDev = false;
-
-  const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
-    chainId: chainId || 137,
-    marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
-    isDev,
-  });
+  const { data: checkoutOptions, isLoading: isLoadingCheckoutOptions } =
+    useCheckoutOptionsMarketplace(
+      {
+        chainId: chainId || 137,
+        wallet: userAddress || '',
+        additionalFee: Number(platformFee) * cartItems.length,
+        orders: cartItems.map((cartItem) => ({
+          contractAddress: cartItem.collectibleMetadata.collectionAddress,
+          marketplace: MarketplaceKind.sequence_marketplace_v1,
+          orderId: cartItem.orderId || '',
+        })),
+      },
+      {
+        disabled: disabledCheckoutOptionsQuery,
+      },
+    );
 
   if (!cartItems.length || !chainId || orders.length === 0) {
     return null;
@@ -169,96 +169,6 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: collectableQueries.all() });
     void queryClient.invalidateQueries({ queryKey: collectionQueries.all() });
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
-  };
-
-  const countryCode = isDev ? 'US' : countryCodeData;
-
-  const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '');
-  const isNFTCheckoutValidCurrency = checkCurrencyValidity(
-    erc20Address,
-    chainId,
-  );
-
-  const showCreditCardButton =
-    cartType === OrderItemType.BUY &&
-    isNFTCheckoutValidCountry &&
-    isNFTCheckoutValidCurrency &&
-    isCheckoutWhitelisted;
-
-  const renderBuyWithCreditCard = () => {
-    if (!showCreditCardButton) {
-      return null;
-    }
-
-    const isTooManyItems = cartItems.length > 1;
-    const tooManyItemsMessage =
-      'Only 1 item can be purchased at a time with a credit card';
-
-    const cartItem = cartItems[0];
-
-    const orderbook = new Orderbook({
-      chainId,
-      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
-    });
-
-    const onCreditCardSuccesss = async (txnHash: string) => {
-      resetCart();
-
-      await publicClient?.waitForTransactionReceipt({
-        hash: txnHash as Hex,
-        confirmations: 5,
-      });
-
-      postTransactionCacheClear();
-    };
-
-    const checkoutSettings: CheckoutSettings = {
-      creditCardCheckout: {
-        chainId: cartItem?.chainId || 137,
-        contractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-        recipientAddress: userAddress!,
-        currencyQuantity: String(cartItem?.subtotal || 0n),
-        currencySymbol: erc20Symbol.toUpperCase(),
-        currencyAddress: erc20Address.toLowerCase(),
-        currencyDecimals: String(erc20Decimals),
-        nftId: cartItem?.collectibleMetadata.tokenId || '',
-        nftAddress: cartItem?.collectibleMetadata.collectionAddress || '',
-        nftQuantity: String(cartItem?.quantity || 0n),
-        nftDecimals: (cartItem?.collectibleMetadata.decimals || 0).toString(),
-        calldata: orderbook.acceptRequest_data({
-          orderId: BigInt(cartItem?.orderId || ''),
-          quantity: cartItem?.quantity || 0n,
-          receiver: userAddress!,
-          additionalFees: [platformFee],
-          additionalFeeReceivers: [frontEndFeeRecipient as Hex],
-        }),
-        approvedSpenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
-        isDev,
-        onSuccess: (txnHash) => {
-          onCreditCardSuccesss(txnHash).catch((e) => console.error(e));
-        },
-        onError: (error) => {
-          console.error(error);
-        },
-      },
-    };
-
-    const onClickNFTCheckout = () => {
-      triggerCheckout(checkoutSettings);
-    };
-
-    return (
-      <>
-        <Box title={isTooManyItems ? tooManyItemsMessage : undefined}>
-          <Button
-            className="w-full"
-            label="BUY WITH CREDIT CARD"
-            onClick={onClickNFTCheckout}
-          />
-        </Box>
-        <Text className="text-center">OR</Text>
-      </>
-    );
   };
 
   if (!isConnected) {
@@ -283,23 +193,12 @@ export const OrderbookOrderButtons = ({
     (erc20ApprovalEnabled && isErc20ApprovalLoading) ||
     (erc721ApprovalEnabled && isErc721ApprovalLoading) ||
     (erc1155ApprovalEnabled && isErc1155ApprovalLoading) ||
+    (!disabledCheckoutOptionsQuery && isLoadingCheckoutOptions) ||
     isLoading ||
     !orderData
   ) {
     return <Button className="w-full" label="estimating" disabled />;
   }
-
-  if (erc20Approval?.isUserInsufficientBalance) {
-    return (
-      <>
-        {renderBuyWithCreditCard()}
-        <Button className="w-full" label="Insufficient Balance" disabled />
-      </>
-    );
-  }
-
-  const requiresErc20Approval =
-    erc20ApprovalEnabled && erc20Approval?.isRequiresAllowanceApproval;
 
   const requiresErc721Approval =
     erc721ApprovalEnabled && erc721Approval?.isApprovedForAll === false;
@@ -307,8 +206,7 @@ export const OrderbookOrderButtons = ({
   const requiresErc1155Approval =
     erc1155ApprovalEnabled && erc1155Approval?.isApprovedForAll === false;
 
-  const requiresApproval =
-    requiresErc20Approval || requiresErc721Approval || requiresErc1155Approval;
+  const requiresApproval = requiresErc721Approval || requiresErc1155Approval;
 
   const { steps, isBundled } = generateStepsOrderbookAcceptRequest({
     connectorId: connector?.id,
@@ -320,45 +218,6 @@ export const OrderbookOrderButtons = ({
     isApproved: !requiresApproval,
     walletClient: walletClient as GetWalletClientData<any, any> | undefined,
   });
-
-  const renderCurrencyApprovalButton = () => {
-    const onApprove = async () => {
-      if (!walletClient || !erc20Address) return;
-
-      const approveStep = steps.find((s) => s.id === 'approveERC20') as
-        | GenericStep
-        | undefined;
-      if (!approveStep) return;
-
-      setTransactionPendingState(true);
-      try {
-        const txnHash = await approveStep.action();
-
-        await transactionNotification({
-          network: getChain(chainId)!,
-          txHash: txnHash,
-        });
-
-        await refetchErc20Approval();
-      } catch (error) {
-        console.error(error);
-        toast.error('Error approving token');
-      } finally {
-        setTransactionPendingState(false);
-      }
-    };
-
-    if (erc20Approval?.isRequiresAllowanceApproval) {
-      return (
-        <Button
-          className="w-full"
-          label={`Approve`}
-          variant="secondary"
-          onClick={onApprove}
-        />
-      );
-    }
-  };
 
   const renderERC1155ApprovalButton = () => {
     const onApprove = async () => {
@@ -438,47 +297,68 @@ export const OrderbookOrderButtons = ({
     }
   };
 
-  const buyAction = async () => {
-    if (!walletClient || !orderData) return;
-
-    const acceptOrderStep = steps.find((s) => s.id === 'acceptRequestBatch');
-    if (!acceptOrderStep) return;
-
-    setTransactionPendingState(true);
-
-    try {
-      const txnHash = await acceptOrderStep.action({
-        acceptRequests: cartItems.map((item) => ({
-          orderId: item.orderId!,
-          quantity: item.quantity,
-          address: userAddress || '',
-          tokenId: item.collectibleMetadata.tokenId,
-          additionalFees: platformFee ? [BigInt(platformFee?.toString())] : [],
-          additionalFeeRecipients: platformFee
-            ? [frontEndFeeRecipient as Hex]
-            : [],
-        })) as [AcceptRequest, ...AcceptRequest[]],
-      });
-
-      await transactionNotification({
-        network: getChain(chainId)!,
-        txHash: txnHash,
-      });
-
-      postTransactionCacheClear();
-
-      onTransactionFinish({
-        transactionId: txnHash,
-        cartItems: snapshot(cartState.cartItems),
-        cartType: cartType,
-      });
-
-      resetCart();
-    } catch (error: unknown) {
-      showErrorToast(error);
+  const buyAction = () => {
+    if (!userAddress) {
+      return;
     }
 
-    setTransactionPendingState(false);
+    const orderbook = new Orderbook({
+      chainId,
+      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
+    });
+
+    const transactionData = orderbook.acceptRequestBatch_data({
+      orderIds: cartItems.map((cartItem) => BigInt(cartItem.orderId || 0)),
+      quantities: cartItems.map((cartItem) => cartItem.quantity),
+      receivers: cartItems.map(() => userAddress),
+      additionalFees: cartItems.map(() => platformFee),
+      additionalFeeReceivers: cartItems.map(() => frontEndFeeRecipient as Hex),
+    });
+
+    openSelectPaymentModal({
+      chain: chainId,
+      collectibles: cartItems.map((cartItem) => {
+        const decimals = cartItem.collectibleMetadata.decimals || 0;
+        return {
+          tokenId: cartItem.collectibleMetadata.tokenId,
+          quantity: cartItem.quantity.toString(),
+          decimals: String(decimals),
+        };
+      }),
+      currencyAddress: erc20Address,
+      price: erc20Amount.toString(),
+      targetContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+      txData: transactionData,
+      collectionAddress,
+      recipientAddress: userAddress,
+      onSuccess: (txnHash: string) => {
+        transactionNotification({
+          network: getChain(chainId)!,
+          txHash: txnHash,
+        })
+          .then(() => {
+            postTransactionCacheClear();
+
+            onTransactionFinish({
+              transactionId: txnHash,
+              cartItems: snapshot(cartState.cartItems),
+              cartType: cartType,
+            });
+
+            resetCart();
+          })
+          .catch((e) => console.error(e));
+      },
+      onError: (error: Error) => {
+        showErrorToast(error);
+      },
+      enableMainCurrencyPayment: true,
+      enableSwapPayments:
+        checkoutOptions?.options.swap?.includes(
+          TransactionSwapProvider.zerox,
+        ) || false,
+      creditCardProviders: checkoutOptions?.options.nftCheckout,
+    });
   };
 
   const sellAction = async () => {
@@ -535,14 +415,7 @@ export const OrderbookOrderButtons = ({
 
     switch (cartType) {
       case OrderItemType.BUY:
-        return (
-          <Button
-            className="w-full"
-            label={`BUY`}
-            onClick={onBuyClick}
-            disabled={!isBundled && requiresApproval}
-          />
-        );
+        return <Button className="w-full" label={`BUY`} onClick={onBuyClick} />;
       case OrderItemType.SELL:
         return (
           <Button
@@ -563,8 +436,7 @@ export const OrderbookOrderButtons = ({
 
   return (
     <>
-      {cartType === OrderItemType.BUY && renderBuyWithCreditCard()}
-      {!isBundled && renderCurrencyApprovalButton()}
+      {/* {!isBundled && renderCurrencyApprovalButton()} */}
       {!isBundled && renderERC1155ApprovalButton()}
       {!isBundled && renderERC721ApprovalButton()}
       {renderOrderButton()}
