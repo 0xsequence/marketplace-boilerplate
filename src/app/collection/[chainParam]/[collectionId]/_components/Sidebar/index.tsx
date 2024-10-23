@@ -3,14 +3,14 @@
 import { useState, type ComponentProps } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import { collectionQueries } from '~/lib/queries';
 
 import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
 import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '@0xsequence/marketplace-sdk';
+import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import type { ObservableBoolean } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
@@ -65,12 +65,10 @@ const CollectionSidebarContent = ({
 }: CollectionSidebarProps) => {
   // const { isConnected } = useAccount();
 
-  const collectableFilters = useQuery(
-    collectionQueries.filter({
-      chainID: chainId.toString(),
-      contractAddress: collectionAddress,
-    }),
-  );
+  const collectableFilters = useFilters({
+    chainId: chainId.toString(),
+    collectionAddress,
+  });
 
   const path = usePathname();
   const mode = path.includes('/sell') ? 'sell' : 'buy';

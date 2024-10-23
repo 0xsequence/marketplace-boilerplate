@@ -3,6 +3,9 @@
 /.pnp
 .pnp.js
 
+# local packages
+/packages/marketplace-sdk/node_modules
+/packages/marketplace-sdk/dist
 
 # next.js
 /.next/

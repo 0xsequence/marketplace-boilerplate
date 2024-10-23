@@ -5,22 +5,19 @@ import { forwardRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
-import type { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
+import { type CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 export type CollectiblesGridProps = {
   data: CollectibleOrder[];
-  itemType: OrderItemType;
   endReached?: () => void;
 };
 
 export const CollectiblesGrid = ({
   endReached,
   data,
-  itemType,
 }: CollectiblesGridProps) => {
   return (
     <VirtuosoGrid
@@ -29,9 +26,7 @@ export const CollectiblesGrid = ({
       components={{
         List: GridContainer,
       }}
-      itemContent={(index, data) => (
-        <CollectibleCard key={index} itemType={itemType} data={data} />
-      )}
+      itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
       endReached={endReached}
       data={data}
     />
@@ -39,7 +34,7 @@ export const CollectiblesGrid = ({
 };
 
 type GridContainerProps = {
-  className: string;
+  className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };

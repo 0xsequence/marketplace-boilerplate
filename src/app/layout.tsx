@@ -1,23 +1,22 @@
 import { classNames } from '~/config/classNames';
-import { getMarketConfig } from '~/config/marketplace';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import '~/styles/globals.scss';
 
 import { cn } from '$ui';
-import getWagmiCookieState from '../config/networks/wagmi/getWagmiCookie';
 import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
-import Providers from './_providers';
 import type { Metadata } from 'next';
+import Providers from './_providers';
+import '@0xsequence/marketplace-sdk/styles'
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const marketConfig = await getMarketConfig();
-  const wagmiInitState = await getWagmiCookieState();
-
-  const { fontUrl, cssString, faviconUrl } = marketConfig;
+  const { getInitialState, getMarketplaceConfig, config } = ssrClient();
+  const { fontUrl, cssString, faviconUrl } = await getMarketplaceConfig();
+  const initialState = await getInitialState();
 
   return (
     <html lang="en">
@@ -30,7 +29,7 @@ export default async function RootLayout({
         <style>{cssString}</style>
       </head>
       <body className={cn(classNames.themeManager, inter.className)}>
-        <Providers wagmiInitState={wagmiInitState} marketConfig={marketConfig}>
+        <Providers sdkInitialState={initialState} sdkConfig={config}>
           <Layout>{children}</Layout>
         </Providers>
       </body>
@@ -39,30 +38,31 @@ export default async function RootLayout({
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const marketConfig = await getMarketConfig();
+  const { getMarketplaceConfig } = ssrClient();
+  const marketplaceConfig = await getMarketplaceConfig();
   return {
     title: {
-      template: marketConfig.titleTemplate ?? '%s',
-      default: marketConfig.title ?? '',
+      template: marketplaceConfig.titleTemplate ?? '%s',
+      default: marketplaceConfig.title ?? '',
     },
-    description: marketConfig.shortDescription ?? '',
-    manifest: marketConfig.manifestUrl,
+    description: marketplaceConfig.shortDescription ?? '',
+    manifest: marketplaceConfig.manifestUrl,
     twitter: {
       card: 'summary_large_image',
     },
     openGraph: {
       type: 'website',
-      title: marketConfig.title ?? '',
-      description: marketConfig.shortDescription ?? '',
+      title: marketplaceConfig.title ?? '',
+      description: marketplaceConfig.shortDescription ?? '',
       images: [
         {
-          url: marketConfig.ogImage ?? '',
-          alt: marketConfig.title,
+          url: marketplaceConfig.ogImage ?? '',
+          alt: marketplaceConfig.title,
         },
       ],
     },
     appleWebApp: {
-      title: marketConfig.title,
+      title: marketplaceConfig.title,
       statusBarStyle: 'default',
     },
   };
