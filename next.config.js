@@ -1,6 +1,12 @@
+import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
+
 await import('./src/env.js');
 
-/** @type {import("next").NextConfig} */
-const config = {};
+const withVanillaExtract = createVanillaExtractPlugin();
 
-export default config;
+/** @type {import("next").NextConfig} */
+const config = {
+  transpilePackages: ['@0xsequence/marketplace-sdk'],
+};
+
+export default withVanillaExtract(config);

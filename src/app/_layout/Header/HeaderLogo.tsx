@@ -1,22 +1,22 @@
 import { Logo } from '~/components/Logo';
-import { getMarketConfig } from '~/config/marketplace';
-import { truncateAtMiddle } from '~/lib/utils/helpers';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 import Link from 'next/link';
 
 export async function HeaderLogo() {
-  const marketConfig = await getMarketConfig();
+  const { getMarketplaceConfig } = ssrClient();
+  const marketplaceConfig = await getMarketplaceConfig();
   return (
     <Link
       prefetch={false}
       href="/"
       className="my-auto flex items-center text-xl font-bold text-foreground/90"
     >
-      {!marketConfig.logoUrl && marketConfig.title ? (
-        truncateAtMiddle(marketConfig.title, 20)
+      {!marketplaceConfig.logoUrl && marketplaceConfig.title ? (
+        marketplaceConfig.title
       ) : (
         <Logo
-          logoUrl={marketConfig.logoUrl}
+          logoUrl={marketplaceConfig.logoUrl}
           className="h-[calc(var(--headerHeight)-10px)] md:max-h-full"
         />
       )}

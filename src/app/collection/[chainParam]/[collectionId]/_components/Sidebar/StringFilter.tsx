@@ -3,7 +3,7 @@
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
-import { Accordion, Flex, Input, Text, ScrollArea, Checkbox, Label } from '$ui';
+import { Accordion, Checkbox, Flex, Input, Label, ScrollArea, Text } from '$ui';
 import { filters$ } from '../FilterStore';
 import type { FilterProps } from './PropertyFilters';
 import { observer } from '@legendapp/state/react';

@@ -1,10 +1,10 @@
 import {
-  Select as SelectRoot,
-  SelectTrigger,
+  ControlledSelect,
   SelectContent,
   SelectItem,
+  Select as SelectRoot,
+  SelectTrigger,
   SelectValue,
-  ControlledSelect,
 } from './select';
 
 export const Select = {

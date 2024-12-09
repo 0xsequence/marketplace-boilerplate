@@ -8,16 +8,16 @@ import { Popover } from '../Popover';
 import { PopoverContent, PopoverTrigger } from '../Popover/popover';
 import {
   addDays,
-  format,
-  differenceInDays,
   addMonths,
+  differenceInDays,
   endOfDay,
-  setHours,
+  format,
   getHours,
-  setMinutes,
   getMinutes,
-  setSeconds,
   getSeconds,
+  setHours,
+  setMinutes,
+  setSeconds,
 } from 'date-fns';
 
 interface DatePickerWithPresetsProps {

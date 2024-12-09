@@ -1,4 +1,4 @@
-import { Input as BaseInput, SearchInput, ControlInput } from './input';
+import { Input as BaseInput, ControlInput, SearchInput } from './input';
 
 export const Input = {
   Base: BaseInput,

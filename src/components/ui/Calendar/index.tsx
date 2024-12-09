@@ -1,7 +1,7 @@
 'use client';
 
 // https://ui.shadcn.com/docs/components/calendar
-import * as React from 'react';
+import type * as React from 'react';
 import { DayPicker } from 'react-day-picker';
 
 import { ChevronLeftIcon, ChevronRightIcon, cn } from '..';

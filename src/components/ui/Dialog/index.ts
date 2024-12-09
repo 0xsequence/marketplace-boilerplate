@@ -1,12 +1,12 @@
 import {
-  Dialog as DialogRoot,
+  DialogClose,
   DialogContent,
-  DialogTrigger,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogClose,
+  Dialog as DialogRoot,
+  DialogTitle,
+  DialogTrigger,
 } from './dialog';
 
 export const Dialog = {
