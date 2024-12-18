@@ -1,6 +1,6 @@
 import {
-  Popover as PopoverRoot,
   PopoverContent,
+  Popover as PopoverRoot,
   PopoverTrigger,
 } from './popover';
 

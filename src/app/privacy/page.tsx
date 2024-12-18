@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 
-import { Text, Box, cn } from '$ui';
+import { Box, Text, cn } from '$ui';
 
 async function PrivacyPolicy() {
   return (
@@ -362,6 +362,7 @@ async function PrivacyPolicy() {
           <a
             href="https://adssettings.google.com/u/0/authenticated?hl=en"
             target="_blank"
+            rel="noreferrer"
           >
             click here
           </a>{' '}

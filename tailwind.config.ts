@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { type Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 export default {
@@ -120,7 +120,7 @@ export default {
   plugins: [
     require('@tailwindcss/container-queries'),
     require('tailwindcss-animate'),
-    plugin(function ({ matchUtilities, theme }) {
+    plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
           // three-d shadow

@@ -1,7 +1,7 @@
 import {
   Avatar as AvatarBase,
-  AvatarGroup,
   AvatarFallback,
+  AvatarGroup,
   AvatarImage,
 } from './avatar';
 

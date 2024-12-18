@@ -3,7 +3,6 @@ import { classNames } from '~/config/classNames';
 import { Grid, cn } from '$ui';
 import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
-import { OrderCartButton } from './Buttons/OrderCartButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
 
@@ -20,6 +19,8 @@ export const Header = () => {
       / auto auto 1fr auto auto auto auto auto auto`}
     >
       <Grid.Child name="logo" className="flex items-center">
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore Server Component */}
         <HeaderLogo />
       </Grid.Child>
 
@@ -31,10 +32,6 @@ export const Header = () => {
 
       <Grid.Child name="wallet-button" className="bg-background/30">
         <WalletButton />
-      </Grid.Child>
-
-      <Grid.Child name="order-button" className="bg-background/30">
-        <OrderCartButton />
       </Grid.Child>
 
       <Grid.Child name="network-button" className="mr-2 bg-background/30">

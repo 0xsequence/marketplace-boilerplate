@@ -1,7 +1,7 @@
 import {
-  Accordion as AccordionRoot,
   AccordionContent,
   AccordionItem,
+  Accordion as AccordionRoot,
   AccordionTrigger,
 } from './accordion';
 

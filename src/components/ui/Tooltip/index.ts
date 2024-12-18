@@ -1,7 +1,7 @@
 import {
+  TooltipContent,
   TooltipProvider,
   Tooltip as TooltipRoot,
-  TooltipContent,
   TooltipTrigger,
 } from './tooltip';
 

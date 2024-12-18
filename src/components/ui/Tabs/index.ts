@@ -1,4 +1,4 @@
-import { Tabs as TabsRoot, TabsList, TabsTrigger, TabsContent } from './tabs';
+import { TabsContent, TabsList, Tabs as TabsRoot, TabsTrigger } from './tabs';
 
 export const Tabs = {
   Root: TabsRoot,
