@@ -4,9 +4,9 @@ import { Suspense } from 'react';
 
 import CustomNetworkImage from '~/components/custom-network-image/CustomNetworkImage';
 import CollectionAvatarPlaceholderImage from '~/components/icons/CollectionAvatar';
+import { getProxyImageUrl } from '~/lib/image-proxy';
 import { isVideo } from '~/lib/utils';
 import { cn } from '~/lib/utils';
-import { getProxyImageUrl } from '~/lib/image-proxy';
 
 import CollectionImage from './CollectionImage';
 import { Image, Text } from '@0xsequence/design-system';

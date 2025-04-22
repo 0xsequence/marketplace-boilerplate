@@ -5,6 +5,7 @@ import { Suspense, useState } from 'react';
 import { getProxyImageUrl } from '~/lib/image-proxy';
 import { isHtml, isVideo, is3dModel, isAnimationUrl } from '~/lib/utils';
 import { cn } from '~/lib/utils';
+
 import { Image } from '@0xsequence/design-system';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import dynamic from 'next/dynamic';
