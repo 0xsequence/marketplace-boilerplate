@@ -1,0 +1,42 @@
+body {
+  --background: 0 0% 4%;
+  --foreground: 0 0% 98%;
+
+  --primary: 259 94% 60%;
+  --primary-foreground: 254 100% 57%;
+
+  --secondary: 130 90% 56%;
+  --secondary-foreground: 130 100% 75%;
+
+  --muted: 130 10% 11%;
+  --muted-foreground: 130 5.3% 56.9%;
+
+  --destructive: 18 63% 47%;
+  --destructive-foreground: 18 89% 92%;
+
+  --success: 108 63% 47%;
+  --success-foreground: 0 0% 100%;
+
+  --warning: 54 75% 55%;
+  --warning-foreground: 0 0% 100%;
+
+  --pink: 299 100% 75%;
+  --pink-foreground: 0 0% 100%;
+
+  /* network colors */
+  --polygon: 262 80% 15%;
+  --polygon-foreground: 262 75% 59%;
+
+  /* rest */
+  --border: 0 0% 20%;
+  --input: 130 0% 20%;
+
+  --ring: 130 100% 63%;
+
+  --radius: 1rem;
+
+  --font-main: 'Inter', sans-serif;
+
+  /* colors that are not received from the styles.css file from builder */
+  --selected-highlight: 247 100% 75%;
+}
