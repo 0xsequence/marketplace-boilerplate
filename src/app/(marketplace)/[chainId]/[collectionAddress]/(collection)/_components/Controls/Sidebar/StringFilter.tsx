@@ -12,9 +12,9 @@ import {
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { cn } from '~/lib/utils';
 
-import { useFilters } from '../../FilterProvider';
 import type { FilterProps } from './PropertyFilters';
 import { Checkbox, SearchInput, Text } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import Fuse from 'fuse.js';
 import { capitalize } from 'radash';
 
@@ -34,7 +34,7 @@ export const StringFilter = ({ filter }: FilterProps) => {
     setOptions(filtered.map((filteredItem) => filteredItem.item));
   };
   const isMD = useIsMinWidth('@md');
-  const { toggleStringFilterValue, isStringValueSelected } = useFilters();
+  const { toggleStringFilterValue, isStringValueSelected } = useFilterState();
 
   const onCheckChange = (value: string) => {
     // apply filters instantly when a filter is toggled, for wide screens. wait user to click on "Apply" button for mobile

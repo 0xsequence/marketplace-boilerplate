@@ -6,19 +6,22 @@ import CopyButton from '~/components/CopyButton';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 
 import { Portal } from '$ui';
-import { useFilters } from '../../FilterProvider';
 import { PropertyFilters } from './PropertyFilters';
+import { useSidebarState } from './SidebarContext';
 import {
   CloseIcon,
-  Divider,
   IconButton,
   Switch,
   Text,
   Button,
   Scroll,
+  cn,
 } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
-import { useFilters as useFiltersMeta } from '@0xsequence/marketplace-sdk/react/hooks';
+import {
+  useFiltersProgressive,
+  useFilterState,
+} from '@0xsequence/marketplace-sdk/react/hooks';
 import { type ChainId, networks } from '@0xsequence/network';
 import { useParams } from 'next/navigation';
 import { type Hex } from 'viem';
@@ -56,12 +59,17 @@ const Filters = () => {
   const isMD = useIsMinWidth('@md');
   const explorerUrl = `${networks[chainId as unknown as ChainId]?.blockExplorer?.rootUrl}address/${collectionAddress}`;
 
-  const collectableFilters = useFiltersMeta({
+  const {
+    data: filters,
+    isFetchingValues,
+    isLoadingNames,
+    isError: filtersError,
+  } = useFiltersProgressive({
     chainId,
     collectionAddress,
   });
 
-  const { showListedOnly, setShowListedOnly } = useFilters();
+  const { showListedOnly, setShowListedOnly } = useFilterState();
 
   return (
     <div className="[&>div]:before:to-transparent [&>div>div]:pr-2">
@@ -79,27 +87,23 @@ const Filters = () => {
             onCheckedChange={setShowListedOnly}
           />
 
-          <Divider className="my-4! bg-border-normal" />
-
-          {collectableFilters.error ? (
+          {filtersError ? (
             <div className="flex flex-col p-2 rounded-md bg-background-error">
               <Text className="text-xs text-error">
                 Failed to load filters. Please try again.
               </Text>
             </div>
-          ) : collectableFilters.data?.length ||
-            collectableFilters.isLoading ? (
+          ) : (
             <div className="flex flex-col gap-3">
               <PropertyFilters
-                filters={collectableFilters.data}
-                loading={collectableFilters.isLoading}
+                filters={filters}
+                isLoadingNames={isLoadingNames}
+                isFetchingValues={isFetchingValues}
               />
             </div>
-          ) : null}
+          )}
 
-          <Divider className="my-4! bg-border-normal" />
-
-          <div className="flex flex-row md:flex-col! justify-between mb-2 pb-10">
+          <div className="flex flex-row md:flex-col! justify-between mb-2 pb-10 border-t border-t-border-normal pt-4 mt-4">
             <Text className="pl-2 text-xs text-muted font-medium">
               Collection address
             </Text>
@@ -129,7 +133,8 @@ function FiltersModalsForSmallScreens() {
     document.body.style.overflow = 'hidden';
   }, []);
 
-  const { toggleSidebar, clearAllFilters } = useFilters();
+  const { toggleSidebar } = useSidebarState();
+  const { clearAllFilters } = useFilterState();
 
   const closeFiltersModal = () => {
     toggleSidebar();
@@ -194,7 +199,12 @@ const ListedOnlySwitch = ({
   onCheckedChange: (checked: boolean) => void;
 }) => {
   return (
-    <div className="flex items-center space-x-2 [&>label]:w-full [&>label]:justify-between [&>label>div>span]:text-primary">
+    <div
+      className={cn(
+        'flex items-center space-x-2 [&>label]:w-full [&>label]:justify-between [&>label>div>span]:text-primary',
+        'border-b border-b-border-normal pb-4 mb-4',
+      )}
+    >
       <Switch
         id={'show-listed-only'}
         description="Show listed only"

@@ -9,9 +9,9 @@ import {
   AccordionTrigger,
 } from '~/components/ui/Accordion';
 
-import { useFilters } from '../../FilterProvider';
 import type { FilterProps } from './PropertyFilters';
 import { Button, cn, Text, TextInput } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import { capitalize } from 'radash';
 
 const useIntRangeFilter = (
@@ -19,7 +19,7 @@ const useIntRangeFilter = (
   filterMin?: number,
   filterMax?: number,
 ) => {
-  const { getIntFilterRange, setIntFilterValue } = useFilters();
+  const { getIntFilterRange, setIntFilterValue } = useFilterState();
   const range = getIntFilterRange(name);
   const currentMin = range?.[0];
   const currentMax = range?.[1];

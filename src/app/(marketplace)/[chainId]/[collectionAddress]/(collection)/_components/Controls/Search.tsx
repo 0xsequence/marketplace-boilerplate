@@ -5,12 +5,13 @@ import { useMemo } from 'react';
 
 import { cn } from '~/lib/utils';
 
-import { useFilters } from '../FilterProvider';
+import { useSidebarState } from './Sidebar/SidebarContext';
 import { IconButton, SearchIcon, SearchInput } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import { debounce } from 'radash';
 
 function CollectionSearch() {
-  const { searchBarOpen, toggleSearchBar } = useFilters();
+  const { searchBarOpen, toggleSearchBar } = useSidebarState();
 
   return (
     <>
@@ -31,7 +32,7 @@ function CollectionSearch() {
 }
 
 export function CollectionSearchInput({ className }: { className?: string }) {
-  const { setSearchText } = useFilters();
+  const { setSearchText } = useFilterState();
 
   const debouncedSearch = useMemo(
     () =>

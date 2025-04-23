@@ -8,7 +8,7 @@ import { cn } from '~/lib/utils';
 import { Grid } from '$ui';
 import { CollectionControls } from '../Controls/CollectionControls';
 import { CollectionSearchInput } from '../Controls/Search';
-import { useFilters } from '../FilterProvider';
+import { useSidebarState } from '../Controls/Sidebar/SidebarContext';
 import Metrics from './Metrics';
 import { BugIcon, Image, Text } from '@0xsequence/design-system';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
@@ -20,7 +20,7 @@ const CollectionHeader = () => {
   const params = useParams();
   const chainId = Number(params.chainId);
   const collectionAddress = params.collectionAddress as Hex;
-  const { searchBarOpen } = useFilters();
+  const { searchBarOpen } = useSidebarState();
   const {
     data: collection,
     isLoading: collectionLoading,

@@ -1,8 +1,8 @@
 'use client';
 
-import { useFilters } from '../FilterProvider';
 import { CloseIcon } from '@0xsequence/design-system';
 import { Text } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 
 type IntBadgeProps = {
   name: string;
@@ -11,7 +11,7 @@ type IntBadgeProps = {
 };
 
 export const IntBadge = ({ name, min, max }: IntBadgeProps) => {
-  const { deleteFilter } = useFilters();
+  const { deleteFilter } = useFilterState();
 
   const formatValue = (value: number | undefined) => {
     if (value === undefined) return '-';

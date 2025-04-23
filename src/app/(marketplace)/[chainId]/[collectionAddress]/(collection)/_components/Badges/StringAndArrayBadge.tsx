@@ -1,7 +1,7 @@
 'use client';
 
-import { useFilters } from '../FilterProvider';
 import { CloseIcon, Text } from '@0xsequence/design-system';
+import { useFilterState } from '@0xsequence/marketplace-sdk/react';
 import type { PropertyFilter } from '@0xsequence/metadata';
 
 type StringAndArrayBadgeProps = {
@@ -10,7 +10,7 @@ type StringAndArrayBadgeProps = {
 
 export const StringAndArrayBadge = ({ filter }: StringAndArrayBadgeProps) => {
   const { name, values = [] } = filter;
-  const { deleteFilter } = useFilters();
+  const { deleteFilter } = useFilterState();
 
   return (
     <div className="flex items-center h-7 capitalize rounded-[8px] px-2 py-1 text-primary border border-background-secondary">
