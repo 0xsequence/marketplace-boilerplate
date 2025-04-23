@@ -4,7 +4,7 @@ import ScrollToTop from '~/components/ScrollToTop';
 import { FilterBadges } from './_components/Badges';
 import CollectionBanner from './_components/Banner';
 import { FiltersSidebar } from './_components/Controls/Sidebar/FiltersSidebar';
-import { FilterProvider } from './_components/FilterProvider';
+import { SidebarProvider } from './_components/Controls/Sidebar/SidebarContext';
 import CollectionHeader from './_components/Header/CollectionHeader';
 import type { Hex } from 'viem';
 
@@ -42,7 +42,7 @@ const CollectionPageLayout = async (props: {
             : '/images/collection-banner-placeholder.png'
         }
       />
-      <FilterProvider>
+      <SidebarProvider>
         <div className="flex flex-col w-full lg:w-[960px]! mx-auto min-h-screen px-4 lg:px-0!">
           <CollectionHeader />
 
@@ -56,7 +56,7 @@ const CollectionPageLayout = async (props: {
             </div>
           </div>
         </div>
-      </FilterProvider>
+      </SidebarProvider>
     </>
   );
 };
