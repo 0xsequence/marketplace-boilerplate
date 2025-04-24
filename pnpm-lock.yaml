@@ -31,7 +31,7 @@ importers:
         version: 2.3.9
       '@0xsequence/marketplace-sdk':
         specifier: ^0.8.5
-        version: 0.8.5(fc2e7efae4559c67943310c2dc27bf3a)
+        version: 0.8.6(db3bc07f5e2432bb364ea1b307587fb8)
       '@0xsequence/metadata':
         specifier: ^2.3.9
         version: 2.3.9
@@ -249,8 +249,8 @@ packages:
   '@0xsequence/indexer@2.3.9':
     resolution: {integrity: sha512-ZtiA7827BTjujOupom5dGJd4oMvfQA2HQ9orjrreZusQPmfadie9ldVrnzX19YS+AZDeCOix9qDG+cRSpYfHwQ==}
 
-  '@0xsequence/marketplace-sdk@0.8.5':
-    resolution: {integrity: sha512-lXGu4C4h9ITSpRbN6c6L51vxJK3Ln7eA6KYhQylmJ1yeJX07N1YlTyDyvrHIzflHRm+Gc12xXFNGxQ0O7H/S7Q==}
+  '@0xsequence/marketplace-sdk@0.8.6':
+    resolution: {integrity: sha512-Fyp87VgBWqS0I3ZglF3J3S1L8tlP9hcaMjfrt62mWuOBcAsdytLJszGPAaiE5QqFQQ+1IsXg/gx0v8e5WpsjOQ==}
     peerDependencies:
       0xsequence: ^2.3.8
       '@0xsequence/api': ^2.3.8
@@ -4099,7 +4099,7 @@ snapshots:
 
   '@0xsequence/indexer@2.3.9': {}
 
-  '@0xsequence/marketplace-sdk@0.8.5(fc2e7efae4559c67943310c2dc27bf3a)':
+  '@0xsequence/marketplace-sdk@0.8.6(db3bc07f5e2432bb364ea1b307587fb8)':
     dependencies:
       0xsequence: 2.3.9(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@0xsequence/api': 2.3.9
@@ -4118,6 +4118,7 @@ snapshots:
       clsx: 2.1.1
       date-fns: 4.1.0
       dnum: 2.14.0
+      nuqs: 2.4.3(next@15.3.1(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.83.4))(react@19.1.0)
       react: 19.1.0
       react-day-picker: 9.6.7(react@19.1.0)
       react-dom: 19.1.0(react@19.1.0)
@@ -4126,7 +4127,11 @@ snapshots:
       wagmi: 2.14.16(@tanstack/query-core@5.74.4)(@tanstack/react-query@5.74.4(react@19.1.0))(@types/react@19.1.2)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.27.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.3))(zod@3.24.3)
       zod: 3.24.3
     transitivePeerDependencies:
+      - '@remix-run/react'
       - expo-sqlite
+      - next
+      - react-router
+      - react-router-dom
       - solid-js
 
   '@0xsequence/marketplace@2.3.9': {}
