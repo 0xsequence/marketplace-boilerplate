@@ -1,15 +1,15 @@
 {
-  "name": "marketplace-app-v2",
-  "version": "0.1.0",
+  "name": "marketplace-boilerplate",
+  "version": "2.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "pnpm run format && next build",
-    "dev": "next dev -p 4421",
+    "dev": "next dev -p 4444",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format:fix": "prettier --write --ignore-path .prettierignore .",
-    "start": "next start -p 4421",
+    "start": "next start -p 4444",
     "check": "tsc --noEmit",
     "knip": "knip",
     "env-file": "cp -n .env.example .env"
@@ -59,7 +59,6 @@
     "@types/react-dom": "^19.1.2",
     "eslint": "^9.25.1",
     "eslint-config-next": "^15.3.1",
-    "knip": "^5.50.5",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5.8.3",
