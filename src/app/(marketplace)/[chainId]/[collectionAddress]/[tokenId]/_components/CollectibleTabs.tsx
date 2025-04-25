@@ -14,6 +14,7 @@ export default function CollectibleTabs({
   children: React.ReactNode;
 }) {
   const params = useParams();
+  const defaultTab = params.mode as 'details' | 'offers' | 'listings';
   const chainId = Number(params.chainId);
   const collectionAddress = params.collectionAddress as Hex;
   const tokenId = params.tokenId as string;
@@ -45,6 +46,7 @@ export default function CollectibleTabs({
       <div className="border-b border-border-normal mb-4">
         <TabbedNav
           variant="line"
+          defaultValue={defaultTab}
           tabs={[
             {
               value: 'details',

@@ -124,7 +124,9 @@ const CollectionHeader = () => {
 
         <CollectionControls />
 
-        {searchBarOpen && <CollectionSearchInput className="md:hidden mb-6" />}
+        {searchBarOpen && (
+          <CollectionSearchInput className="flex [&>label]:w-full md:hidden mb-6" />
+        )}
       </div>
     </>
   );

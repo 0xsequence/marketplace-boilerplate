@@ -25,7 +25,7 @@ import { type Hex } from 'viem';
 
 export const FiltersSidebar = () => {
   const isMD = useIsMinWidth('@md');
-  const { filtersSidebarOpen } = useFilters();
+  const { filtersSidebarOpen } = useSidebarState();
 
   if (!filtersSidebarOpen) {
     return null;
