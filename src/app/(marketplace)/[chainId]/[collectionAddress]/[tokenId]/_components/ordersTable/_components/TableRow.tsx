@@ -7,6 +7,7 @@ import { cn } from '~/lib/utils';
 import OrdersTableAction from './Action';
 import AddressPill from './AddressPill';
 import MarketplacePill from './MarketplacePill';
+import TimeLeft from './TimeLeft';
 import { Text } from '@0xsequence/design-system';
 import {
   compareAddress,
@@ -14,7 +15,6 @@ import {
   type Order,
 } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
-import { formatDistance } from 'date-fns';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
@@ -71,9 +71,7 @@ const OrdersTableRow = ({
             <div className="flex flex-col gap-1">
               <Text className="text-xs text-muted font-bold">Time left</Text>
 
-              <Text className="text-sm text-primary font-bold">
-                {formatDistance(order.validUntil, new Date())}
-              </Text>
+              <TimeLeft endDate={order.validUntil} />
             </div>
           </div>
 
@@ -133,9 +131,7 @@ const OrdersTableRow = ({
         </Table.Cell>
 
         <Table.Cell>
-          <Text className="text-xs text-secondary font-medium">
-            {formatDistance(order.validUntil, new Date())}
-          </Text>
+          <TimeLeft endDate={order.validUntil} />
         </Table.Cell>
 
         <Table.Cell>

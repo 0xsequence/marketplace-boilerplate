@@ -318,6 +318,7 @@ function BuyNowCta({ lowestListing }: { lowestListing: Order }) {
         }
         label="Buy now"
       />
+
       <TimeRemaining endDate={lowestListing.validUntil} />
     </>
   );
@@ -400,6 +401,7 @@ function SellCta({ highestOffer }: { highestOffer: Order }) {
           background: 'var(--seq-color-gradient-primary)',
         }}
       />
+
       <TimeRemaining endDate={highestOffer.validUntil} />
     </>
   );
