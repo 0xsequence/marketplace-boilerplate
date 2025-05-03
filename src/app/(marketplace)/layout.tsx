@@ -27,7 +27,11 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
       </head>
       <body>
-        <Providers sdkInitialState={initialState} sdkConfig={config}>
+        <Providers
+          sdkInitialState={initialState}
+          sdkConfig={config}
+          marketplaceConfig={marketplaceConfig}
+        >
           <Layout>{children}</Layout>
         </Providers>
       </body>

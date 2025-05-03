@@ -15,59 +15,31 @@ import type { MarketplaceConfig, SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   createWagmiConfig,
   getQueryClient,
-  marketplaceConfigOptions,
   MarketplaceProvider,
   ModalProvider,
 } from '@0xsequence/marketplace-sdk/react';
 import { SequenceWalletProvider } from '@0xsequence/wallet-widget';
-import { QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { type State, WagmiProvider } from 'wagmi';
 
-const queryClient = getQueryClient();
-
 const SHOW_DESCRIPTIVE_SOCIALS_THRESHOLD = 2;
+
+const queryClient = getQueryClient();
 
 export default function Providers({
   sdkInitialState,
   sdkConfig,
+  marketplaceConfig,
   children,
 }: {
   sdkInitialState?: { wagmi?: State };
   sdkConfig: SdkConfig;
-  children: React.ReactNode;
-}) {
-  const { data: marketplaceConfig } = useQuery(
-    marketplaceConfigOptions(sdkConfig),
-    queryClient,
-  );
-
-  return marketplaceConfig ? (
-    <Providers2
-      config={sdkConfig}
-      marketplaceConfig={marketplaceConfig}
-      initialState={sdkInitialState}
-    >
-      {children}
-    </Providers2>
-  ) : (
-    <></>
-  );
-}
-
-const Providers2 = ({
-  config,
-  marketplaceConfig,
-  children,
-  initialState,
-}: {
-  config: SdkConfig;
   marketplaceConfig: MarketplaceConfig;
   children: React.ReactNode;
-  initialState?: { wagmi?: State };
-}) => {
+}) {
   const [wagmiConfig] = useState(
-    createWagmiConfig(marketplaceConfig, config, !!initialState),
+    createWagmiConfig(marketplaceConfig, sdkConfig, !!sdkInitialState),
   );
 
   const isDev = process.env.NEXT_PUBLIC_ENV === 'development';
@@ -99,7 +71,7 @@ const Providers2 = ({
     socialAuthConnectors.length <= SHOW_DESCRIPTIVE_SOCIALS_THRESHOLD;
 
   const connectConfig = {
-    projectAccessKey: config.projectAccessKey,
+    projectAccessKey: sdkConfig.projectAccessKey,
     signIn: {
       projectName: marketplaceConfig.title,
       descriptiveSocials: showDescriptiveSocials,
@@ -109,7 +81,7 @@ const Providers2 = ({
 
   return (
     <ThemeProvider>
-      <WagmiProvider config={wagmiConfig} initialState={initialState?.wagmi}>
+      <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
         <QueryClientProvider client={queryClient}>
           <SequenceConnectProvider config={connectConfig}>
             <SequenceCheckoutProvider
@@ -119,7 +91,7 @@ const Providers2 = ({
             >
               <SequenceWalletProvider>
                 <ToastProvider>
-                  <MarketplaceProvider config={config}>
+                  <MarketplaceProvider config={sdkConfig}>
                     <AnalyticsProvider>{children}</AnalyticsProvider>
                     <ReactQueryDevtools initialIsOpen={false} />
                     <ModalProvider />
@@ -132,4 +104,4 @@ const Providers2 = ({
       </WagmiProvider>
     </ThemeProvider>
   );
-};
+}
