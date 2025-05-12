@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, Text } from '@0xsequence/design-system';
+import { Text } from '@0xsequence/design-system';
 import Link from 'next/link';
 
 type HeaderLogoProps = {
@@ -16,7 +16,7 @@ export const HeaderLogo = ({ logoUrl, title }: HeaderLogoProps) => {
       className={'flex items-center text-xl font-bold text-secondary'}
     >
       {logoUrl ? (
-        <Image
+        <img
           src={logoUrl}
           className="h-full max-w-[200px] object-contain"
           alt="Logo"

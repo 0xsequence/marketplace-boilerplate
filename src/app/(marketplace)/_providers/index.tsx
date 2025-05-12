@@ -64,11 +64,7 @@ export default function Providers({
         <QueryClientProvider client={queryClient}>
           <SequenceHooksProvider config={connectConfig}>
             <SequenceConnectProvider config={connectConfig}>
-              <SequenceCheckoutProvider
-                config={{
-                  env: envOverrides,
-                }}
-              >
+              <SequenceCheckoutProvider>
                 <SequenceWalletProvider>
                   <ToastProvider>
                     <MarketplaceProvider config={sdkConfig}>
