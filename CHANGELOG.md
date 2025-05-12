@@ -9,12 +9,7 @@
 
 ### Dependencies
 
-- Updated SDK packages to latest versions
-  - @0xsequence/checkout to v5.2.1
-  - @0xsequence/connect to v5.2.1
-  - @0xsequence/wallet-widget to v5.2.1
-  - @0xsequence/marketplace-sdk to v0.8.7
-- Updated development dependencies
+- Updated all major dependencies to latest versions
 
 ### Collection filters
 
@@ -35,3 +30,5 @@
 - Better mobile view for collection search
 - Enhanced sidebar layout with clearer section separation
 - Improved loading states throughout the application
+- Refactored layout and provider structure for better maintainability
+- Minor UI fixes and consistency improvements throughout the app

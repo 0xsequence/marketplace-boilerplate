@@ -26,11 +26,11 @@ export const Footer = async () => {
       </Text>
 
       <div className="flex gap-2 md:gap-7! items-center justify-center">
-        <Button asChild size="sm" variant="link" className="text-muted p-0">
+        <Button asChild size="sm" variant="text" className="text-muted p-0">
           <NextLink href="/privacy">Privacy Policy</NextLink>
         </Button>
 
-        <Button asChild size="sm" variant="link" className="text-muted p-0">
+        <Button asChild size="sm" variant="text" className="text-muted p-0">
           <NextLink href="/terms">Terms of Service</NextLink>
         </Button>
       </div>

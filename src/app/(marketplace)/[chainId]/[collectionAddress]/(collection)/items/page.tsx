@@ -33,7 +33,7 @@ const CollectionPage = () => {
   if (collectiblesListLoading) {
     return (
       <div className="w-full flex items-center justify-center">
-        <Spinner className="mt-4" label="Loading Collectibles List" />;
+        <Spinner className="mt-4" />;
       </div>
     );
   }

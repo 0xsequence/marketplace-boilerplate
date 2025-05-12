@@ -58,11 +58,11 @@ export const StringFilter = ({ filter }: FilterProps) => {
           <div
             className={cn(
               'my-2',
-              '[&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:px-2',
-              '[&>label>div>div>svg]:w-3',
-              '[&>label>div>div>input]:bg-none! [&>label>div>div>input]:h-8 [&>label>div>div>input]:text-xs',
-              '[&>label>div>div>button]:w-[20px] [&>label>div>div>button]:h-[20px]',
-              '[&>label>div>div>button>svg]:w-[10px]',
+              '[&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:px-2',
+              '[&>label>div>div>div>svg]:w-3',
+              '[&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:h-8 [&>label>div>div>div>input]:text-xs',
+              '[&>label>div>div>div>button]:w-[20px] [&>label>div>div>div>button]:h-[20px]',
+              '[&>label>div>div>div>button>svg]:w-[10px]',
             )}
           >
             <SearchInput
@@ -74,8 +74,6 @@ export const StringFilter = ({ filter }: FilterProps) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleSearch(e.target.value)
               }
-              showSearchIcon={false}
-              onClear={() => handleSearch('')}
             />
           </div>
         ) : (

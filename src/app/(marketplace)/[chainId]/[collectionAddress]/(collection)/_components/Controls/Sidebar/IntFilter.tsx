@@ -134,9 +134,9 @@ export const IntFilter = ({ filter }: FilterProps) => {
           <div className="flex mt-3 w-full items-center gap-4">
             <div
               className={cn(
-                '[&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:px-2',
-                '[&>label>div>div>svg]:w-3',
-                '[&>label>div>div>input]:bg-none! [&>label>div>div>input]:py-1 [&>label>div>div>input]:h-8 [&>label>div>div>input]:text-xs',
+                '[&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:px-2',
+                '[&>label>div>div>div>svg]:w-3',
+                '[&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:py-1 [&>label>div>div>div>input]:h-8 [&>label>div>div>div>input]:text-xs',
               )}
             >
               <TextInput
@@ -156,9 +156,9 @@ export const IntFilter = ({ filter }: FilterProps) => {
 
             <div
               className={cn(
-                '[&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:px-2',
-                '[&>label>div>div>svg]:w-3',
-                '[&>label>div>div>input]:bg-none! [&>label>div>div>input]:py-1 [&>label>div>div>input]:h-8 [&>label>div>div>input]:text-xs',
+                '[&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:px-2',
+                '[&>label>div>div>div>svg]:w-3',
+                '[&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:py-1 [&>label>div>div>div>input]:h-8 [&>label>div>div>div>input]:text-xs',
               )}
             >
               <TextInput

@@ -56,7 +56,6 @@ export default function CollectibleHeading() {
         color="text100"
         fontWeight="bold"
         asChild
-        overflow="hidden"
       >
         <h1>{collectible?.name}</h1>
       </Text>

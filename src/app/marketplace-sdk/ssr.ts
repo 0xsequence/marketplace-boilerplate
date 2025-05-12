@@ -19,9 +19,7 @@ export const ssrClient = async () => {
     cookie: headersList.get('cookie') || '',
     config: {
       projectAccessKey,
-      wallet: {
-        walletConnectProjectId,
-      },
+      walletConnectProjectId,
       projectId,
     },
     queryClient: new QueryClient(),

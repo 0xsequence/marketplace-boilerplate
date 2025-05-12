@@ -48,7 +48,6 @@ async function LandingPageContent({
         </Text>
         <Text
           className="bg-yellow-300 px-1.5 rounded-xs text-xl leading-7"
-          color="backgroundPrimary"
           fontWeight="semibold"
         >
           marketplace

@@ -202,7 +202,6 @@ const DrawerItem = ({
   if (!to) {
     return (
       <Button
-        variant={'none'}
         size="sm"
         className="flex items-center justify-start w-full py-2 px-0 rounded-md"
         onClick={callback}
@@ -223,7 +222,6 @@ const DrawerItem = ({
       className="w-full"
     >
       <Button
-        variant={'none'}
         size="sm"
         className="flex items-center justify-start w-full py-2 px-0 rounded-md"
         onClick={callback}

@@ -17,7 +17,7 @@ export const useAnalytics = () => {
   return new Databeat(server, auth, {
     defaultEnabled: true,
     initProps: () => {
-      return { origin: window.location.origin };
+      return { origin: globalThis.window?.location.origin };
     },
   });
 };

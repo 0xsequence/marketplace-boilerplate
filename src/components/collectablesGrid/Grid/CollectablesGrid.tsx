@@ -116,9 +116,8 @@ export function CollectiblesGrid({
           </Text>
 
           <Button
-            size={'xs'}
-            variant={'secondary'}
-            label={'View more'}
+            size="xs"
+            label="View more"
             onClick={() => setLimitPage(limitPage + 1)}
             className="rounded-full text-primary px-3"
           />

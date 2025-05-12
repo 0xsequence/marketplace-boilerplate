@@ -39,13 +39,7 @@ const InventoryHeader = () => {
 
   return (
     <div className="flex w-full items-center gap-5">
-      <GradientAvatar
-        style={{
-          width: 60,
-          height: 60,
-        }}
-        address={address.toLowerCase()}
-      />
+      <GradientAvatar size="md" address={address.toLowerCase()} />
 
       <div className="flex flex-col gap-2 justify-between">
         <div className="flex items-center gap-1">

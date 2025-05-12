@@ -47,7 +47,7 @@ export function CollectionSearchInput({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        '[&>label>div>div]:w-[216px] [&>label>div>div]:h-9 [&>label>div>div]:rounded-lg [&>label>div>div]:pl-2 [&>label>div>div>input]:bg-none! [&>label>div>div>input]:h-8',
+        '[&>label>div>div>div]:w-[216px] [&>label>div>div>div]:h-9 [&>label>div>div>div]:rounded-lg [&>label>div>div>div]:pl-2 [&>label>div>div>div>input]:bg-none! [&>label>div>div>div>input]:h-8',
         className,
       )}
     >
@@ -55,7 +55,7 @@ export function CollectionSearchInput({ className }: { className?: string }) {
         name="search"
         placeholder="Search name or ID"
         className={
-          'bg-background-primary border border-border-normal focus-visible:border-border-focus'
+          'bg-background-primary border border-border-normal focus-visible:border-border-focus asdasdasd'
         }
         onChange={debouncedSearch}
       />

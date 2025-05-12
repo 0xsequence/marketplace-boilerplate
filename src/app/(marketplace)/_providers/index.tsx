@@ -11,6 +11,7 @@ import {
   SequenceConnectProvider,
 } from '@0xsequence/connect';
 import { ThemeProvider, ToastProvider } from '@0xsequence/design-system';
+import { SequenceHooksProvider } from '@0xsequence/hooks';
 import type { MarketplaceConfig, SdkConfig } from '@0xsequence/marketplace-sdk';
 import {
   createWagmiConfig,
@@ -42,27 +43,6 @@ export default function Providers({
     createWagmiConfig(marketplaceConfig, sdkConfig, !!sdkInitialState),
   );
 
-  const isDev = process.env.NEXT_PUBLIC_ENV === 'development';
-
-  const envOverrides = {
-    marketplaceApiUrl: isDev
-      ? `https://dev-marketplace-api.sequence.app`
-      : `https://marketplace-api.sequence.app`,
-    indexerGatewayUrl: isDev
-      ? `https://dev-indexer.sequence.app`
-      : `https://indexer.sequence.app`,
-    sequenceApiUrl: isDev
-      ? `https://dev-api.sequence.app`
-      : `https://api.sequence.app`,
-    metadataUrl: isDev
-      ? `https://dev-metadata.sequence.app`
-      : `https://metadata.sequence.app`,
-    apiUrl: isDev ? `https://dev-api.sequence.app` : `https://api.sequence.app`,
-    indexerUrl: isDev
-      ? `https://dev-indexer.sequence.app`
-      : `https://indexer.sequence.app`,
-  };
-
   const socialAuthConnectors = (wagmiConfig.connectors as ExtendedConnector[])
     .filter((c) => c._wallet?.type === 'social')
     .filter((c) => !c._wallet.id.includes('email'));
@@ -76,30 +56,31 @@ export default function Providers({
       projectName: marketplaceConfig.title,
       descriptiveSocials: showDescriptiveSocials,
     },
-    env: envOverrides,
   } satisfies ConnectConfig;
 
   return (
     <ThemeProvider>
       <WagmiProvider config={wagmiConfig} initialState={sdkInitialState?.wagmi}>
         <QueryClientProvider client={queryClient}>
-          <SequenceConnectProvider config={connectConfig}>
-            <SequenceCheckoutProvider
-              config={{
-                env: envOverrides,
-              }}
-            >
-              <SequenceWalletProvider>
-                <ToastProvider>
-                  <MarketplaceProvider config={sdkConfig}>
-                    <AnalyticsProvider>{children}</AnalyticsProvider>
-                    <ReactQueryDevtools initialIsOpen={false} />
-                    <ModalProvider />
-                  </MarketplaceProvider>
-                </ToastProvider>
-              </SequenceWalletProvider>
-            </SequenceCheckoutProvider>
-          </SequenceConnectProvider>
+          <SequenceHooksProvider config={connectConfig}>
+            <SequenceConnectProvider config={connectConfig}>
+              <SequenceCheckoutProvider
+                config={{
+                  env: envOverrides,
+                }}
+              >
+                <SequenceWalletProvider>
+                  <ToastProvider>
+                    <MarketplaceProvider config={sdkConfig}>
+                      <AnalyticsProvider>{children}</AnalyticsProvider>
+                      <ReactQueryDevtools initialIsOpen={false} />
+                      <ModalProvider />
+                    </MarketplaceProvider>
+                  </ToastProvider>
+                </SequenceWalletProvider>
+              </SequenceCheckoutProvider>
+            </SequenceConnectProvider>
+          </SequenceHooksProvider>
         </QueryClientProvider>
       </WagmiProvider>
     </ThemeProvider>
