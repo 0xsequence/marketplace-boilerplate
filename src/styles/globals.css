@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+@import '@0xsequence/design-system/preset';
+@import '@0xsequence/marketplace-sdk/styles/preset';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  html {
+    background-color: var(--seq-color-background-primary);
+    /*  Do not support hsl() */
+    --scrollbar-color-thumb: #202020;
+    --scrollbar-color-track: var(--background);
+    --scrollbar-width: thin;
+    --scrollbar-width-legacy: 7px;
+
+    --headerHeight: 60px;
+    --stickyCollectionHeaderHeight: 160px;
+
+    --brandGradient: linear-gradient(270deg, #7537f9 0%, #5826ff 100%);
+    --brandGradientStart: #7537f9;
+    --brandGradientEnd: #5826ff;
+
+    --input-active: 0 0% 53%;
+
+    @media (min-width: 640px) {
+      --stickyCollectionHeaderHeight: 172px;
+    }
+
+    /* Modern browsers with `scrollbar-*` support 
+    @supports (scrollbar-width: auto) {
+      *scrollbar-color: var(--scrollbar-color-thumb)
+        var(--scrollbar-color-track);
+      *scrollbar-width: var(--scrollbar-width);
+    }
+    */
+
+    /* Legacy browsers with `::-webkit-scrollbar-*` support */
+    @supports selector(::-webkit-scrollbar) {
+      *::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: var(--scrollbar-color-thumb);
+      }
+      *::-webkit-scrollbar-track {
+        background: var(--scrollbar-color-track);
+      }
+      *::-webkit-scrollbar {
+        max-width: var(--scrollbar-width-legacy);
+        max-height: var(--scrollbar-width-legacy);
+      }
+    }
+  }
+  body {
+    background-color: hsl(var(--background));
+    font-family: var(--font-main);
+
+    /* google 3d model viewer */
+    model-viewer {
+      --poster-color: 'transparent';
+      --progress-mask: 'transparent';
+    }
+  }
+}
+
+@theme {
+  --color-focus-ring: hsl(254 100% 57%);
+  --color-selected-highlight: hsl(247 100% 75%);
+  --color-brand-primary: hsla(259, 94%, 60%, 1);
+  /* TODO: Remove this once we have animations of Skeleton from design-system working */
+  --animate-shimmer: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% -100%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: -100% -100%;
+  }
+}
+
+/* UTILITIES TODO: Replace it with Skeleton from design-system */
+@utility loading {
+  @apply bg-secondary/10 animate-pulse rounded-sm text-transparent select-none;
+  content-visibility: auto;
+  & * {
+    @apply invisible text-transparent;
+  }
+}
+@utility ellipsis {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+/* Override SDK's CollectibleCard image styles */
+:where(.collectibles-grid) [class*='styles_collectibleImage'] {
+  width: 100% !important;
+}
