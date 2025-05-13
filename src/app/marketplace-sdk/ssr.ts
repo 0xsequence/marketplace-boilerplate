@@ -8,7 +8,7 @@ export const ssrClient = async () => {
   const headersList = await headers();
 
   const projectAccessKey = process.env.NEXT_PUBLIC_ACCESS_KEY;
-  const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_ID;
+  const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID;
   const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
   if (!projectAccessKey || !projectId) {
