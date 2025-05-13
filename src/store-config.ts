@@ -2,11 +2,13 @@ const storeConfig = {
   shop: {
     enabled: true,
     name: 'Shop',
+    // Landing banner image
     bannerUrl: '/images/landing-banner-placeholder.png',
     collections: [
       {
         name: 'Collection 1',
         chainId: 80002,
+        // Collection banner image
         bannerUrl: '/images/collection-banner-placeholder.png',
         salesAddress: '0xddc7029ce8390cdd6b6c1ff58d4bf4c3f1f88bed',
         // This is the address of the items collection, not the sales address

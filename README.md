@@ -6,13 +6,7 @@ A boilerplate for building marketplaces with Sequence.
 
 1. Set up a white-label marketplace in [Sequence Builder](https://sequence.build/) following the [Sequence Marketplace documentation](https://docs.sequence.xyz/solutions/marketplaces/white-label-marketplace).
 
-2. Create an `.env` file by copying the example file:
-
-```sh
-pnpm env-file
-```
-
-3. Configure the following environment variables in your `.env` file:
+2. Configure the following environment variables in your `.env` file, see the example `.env.example` file
 
 ```sh
 # API key from Builder > Settings > API keys
@@ -26,6 +20,8 @@ NEXT_PUBLIC_PROJECT_ID=""
 # Optional WalletConnect project id, for integration with WalletConnect
 NEXT_PUBLIC_WALLETCONNECT_ID=""
 ```
+
+3. Modify the `src/store-config.ts` file to configure the sales contracts
 
 ## Installation
 
