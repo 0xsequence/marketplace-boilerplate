@@ -6,7 +6,6 @@ settings:
 
 overrides:
   cross-fetch: ./fetch-override
-  '@0xsequence/marketplace-sdk': file:../marketplace-sdk/sdk
 
 importers:
 
@@ -34,8 +33,8 @@ importers:
         specifier: ^2.3.12
         version: 2.3.12
       '@0xsequence/marketplace-sdk':
-        specifier: file:../marketplace-sdk/sdk
-        version: file:../marketplace-sdk/sdk(85199e45dc7cb32357e20bebe6ac6e27)
+        specifier: 0.0.0-20250513233135
+        version: 0.0.0-20250513233135(85199e45dc7cb32357e20bebe6ac6e27)
       '@0xsequence/metadata':
         specifier: ^2.3.12
         version: 2.3.12
@@ -269,8 +268,8 @@ packages:
   '@0xsequence/indexer@2.3.12':
     resolution: {integrity: sha512-rw0C8DD/vSKwgALllGMAlaW0ByQXcxQyXFTeyK8g2ytlHeOkhusUJFIV8lMDSqCzReehQTkQjIIxZgtMtkAvWw==}
 
-  '@0xsequence/marketplace-sdk@file:../marketplace-sdk/sdk':
-    resolution: {directory: ../marketplace-sdk/sdk, type: directory}
+  '@0xsequence/marketplace-sdk@0.0.0-20250513233135':
+    resolution: {integrity: sha512-yt2Sbt7YK4qCEg/+83u4Lxe+R41GKG9Z0LvzXwi8cRgyacWBfnMzzR6GWmTdmOCpahIOdQK/TSpM7U8A9evxhA==}
     peerDependencies:
       0xsequence: ^2.3.8
       '@0xsequence/api': ^2.3.8
@@ -2452,8 +2451,8 @@ packages:
   '@walletconnect/window-metadata@1.0.1':
     resolution: {integrity: sha512-9koTqyGrM2cqFRW517BPY/iEtUDx2r1+Pwwu5m7sJ7ka79wi3EyqhqcICk/yDmv6jAS1rjKgTKXlEhanYjijcA==}
 
-  '@xstate/store@3.5.1':
-    resolution: {integrity: sha512-2iWJM5EcsK+m0+lqfZNTbxwlslhYnarupPG956h3KCmz83tGOrGT/V3A6vbFsd081fByJ1ey9RAWV3CE3FufPA==}
+  '@xstate/store@3.6.0':
+    resolution: {integrity: sha512-+hMW3VJL/rYzfXD4M6fqHj8w1KUHiZSqYbXasLPRiI7brTzf6nh000u0MuMPIu9yDX5nXhEKfM4BaQDjg39FVw==}
     peerDependencies:
       react: ^18.2.0 || ^19.0.0
       solid-js: ^1.7.6
@@ -5165,7 +5164,7 @@ snapshots:
 
   '@0xsequence/indexer@2.3.12': {}
 
-  '@0xsequence/marketplace-sdk@file:../marketplace-sdk/sdk(85199e45dc7cb32357e20bebe6ac6e27)':
+  '@0xsequence/marketplace-sdk@0.0.0-20250513233135(85199e45dc7cb32357e20bebe6ac6e27)':
     dependencies:
       0xsequence: 2.3.12(ethers@6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@0xsequence/api': 2.3.12
@@ -5180,7 +5179,7 @@ snapshots:
       '@legendapp/state': 3.0.0-beta.30(react@19.1.0)
       '@tailwindcss/postcss': 4.1.6
       '@tanstack/react-query': 5.76.0(react@19.1.0)
-      '@xstate/store': 3.5.1(react@19.1.0)
+      '@xstate/store': 3.6.0(react@19.1.0)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
       date-fns: 4.1.0
@@ -8460,7 +8459,7 @@ snapshots:
       '@walletconnect/window-getters': 1.0.1
       tslib: 1.14.1
 
-  '@xstate/store@3.5.1(react@19.1.0)':
+  '@xstate/store@3.6.0(react@19.1.0)':
     optionalDependencies:
       react: 19.1.0
 

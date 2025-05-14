@@ -22,7 +22,7 @@
     "@0xsequence/design-system": "^2.1.12",
     "@0xsequence/hooks": "^5.3.1",
     "@0xsequence/indexer": "^2.3.12",
-    "@0xsequence/marketplace-sdk": "^0.8.9",
+    "@0xsequence/marketplace-sdk": "0.0.0-20250513233135",
     "@0xsequence/metadata": "^2.3.12",
     "@0xsequence/network": "^2.3.12",
     "@0xsequence/wallet-widget": "^5.3.1",
@@ -69,7 +69,6 @@
   "packageManager": "pnpm@10.11.0",
   "pnpm": {
     "overrides": {
-      "@0xsequence/marketplace-sdk": "file:../marketplace-sdk/sdk",
       "cross-fetch": "./fetch-override"
     },
     "onlyBuiltDependencies": [
