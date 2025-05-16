@@ -43,7 +43,7 @@ Run the development server:
 pnpm dev
 ```
 
-The application will be available at [http://localhost:4421](http://localhost:4421)
+The application will be available at [http://localhost:4444](http://localhost:4444)
 
 ## Production
 
