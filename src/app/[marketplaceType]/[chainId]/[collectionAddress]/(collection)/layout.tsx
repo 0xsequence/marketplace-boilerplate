@@ -7,7 +7,7 @@ import { FilterBadges } from './_components/Badges';
 import { FiltersSidebar } from './_components/Controls/Sidebar/FiltersSidebar';
 import { SidebarProvider } from './_components/Controls/Sidebar/SidebarContext';
 import { CollectionHeader } from './_components/Header';
-import { compareAddress, MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { compareAddress, type MarketplaceType } from '@0xsequence/marketplace-sdk';
 import type { Hex } from 'viem';
 
 type CollectionParams = {

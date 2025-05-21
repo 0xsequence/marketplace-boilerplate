@@ -1,6 +1,6 @@
 import MarketCollectionHeader from './market/collection-header';
 import { ShopCollectionHeader } from './shop/collection-header';
-import { MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceType } from '@0xsequence/marketplace-sdk';
 
 export const CollectionHeader = ({
   marketplaceType,

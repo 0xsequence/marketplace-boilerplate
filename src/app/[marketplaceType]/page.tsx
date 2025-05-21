@@ -3,7 +3,7 @@ import storeConfig from '~/store-config';
 import { ssrClient } from '../marketplace-sdk/ssr';
 import { LandingPageGrid } from './landing-page-grid';
 import { Text } from '@0xsequence/design-system';
-import { MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceType } from '@0xsequence/marketplace-sdk';
 import { redirect } from 'next/navigation';
 
 const Page = async ({
@@ -26,7 +26,7 @@ const Page = async ({
     : marketplaceConfig.bannerUrl;
 
   if (collections?.length === 1) {
-    const firstCollection = collections[0]!;
+    const firstCollection = collections[0];
     const { chainId, address } = firstCollection;
     redirect(`/${marketplaceType}/${chainId}/${address}/items`);
   }

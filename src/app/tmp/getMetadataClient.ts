@@ -1,4 +1,4 @@
-import { SdkConfig } from '@0xsequence/marketplace-sdk';
+import { type SdkConfig } from '@0xsequence/marketplace-sdk';
 import { SequenceMetadata } from '@0xsequence/metadata';
 
 export const getMetadataClient = (config: SdkConfig) => {

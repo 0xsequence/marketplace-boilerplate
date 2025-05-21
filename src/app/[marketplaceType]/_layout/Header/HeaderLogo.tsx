@@ -3,7 +3,7 @@
 import storeConfig from '~/store-config';
 
 import { Text } from '@0xsequence/design-system';
-import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

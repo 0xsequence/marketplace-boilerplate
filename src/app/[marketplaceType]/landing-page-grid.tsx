@@ -4,7 +4,7 @@ import { CollectionCard } from '~/app/move-to-SDK/collection-card';
 import { CollectionCardSkeleton } from '~/app/move-to-SDK/collection-card-skeleton';
 
 import { useListCollections } from '../tmp/useListCollections';
-import { MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceType } from '@0xsequence/marketplace-sdk';
 import Link from 'next/link';
 
 export function LandingPageGrid({

@@ -13,7 +13,7 @@ import {
   useInventory,
 } from './_components/InventoryContext';
 import { Text } from '@0xsequence/design-system';
-import { MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceType } from '@0xsequence/marketplace-sdk';
 import { useMarketplaceConfig } from '@0xsequence/marketplace-sdk/react';
 import { useParams } from 'next/navigation';
 import type { Address } from 'viem';

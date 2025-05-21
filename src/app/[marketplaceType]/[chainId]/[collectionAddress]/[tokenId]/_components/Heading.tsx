@@ -8,7 +8,7 @@ import CustomSkeleton from '~/components/skeleton';
 
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { Image, Text } from '@0xsequence/design-system';
-import { MarketplaceType } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceType } from '@0xsequence/marketplace-sdk';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { type Hex } from 'viem';

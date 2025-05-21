@@ -9,7 +9,7 @@ import {
 } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Address } from 'viem';
+import { type Address } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
 type ShopCollectibleActionsProps = {

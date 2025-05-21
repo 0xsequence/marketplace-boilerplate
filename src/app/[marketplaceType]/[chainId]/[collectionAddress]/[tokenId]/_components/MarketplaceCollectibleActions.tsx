@@ -11,7 +11,7 @@ import {
   compareAddress,
   ContractType,
   formatPrice,
-  MarketplaceType,
+  type MarketplaceType,
   type Order,
 } from '@0xsequence/marketplace-sdk';
 import {
@@ -310,7 +310,7 @@ function BuyNowCta({ lowestListing }: { lowestListing: Order }) {
           background: 'var(--seq-color-gradient-primary)',
         }}
         onClick={() =>
-          //@ts-expect-error
+          //@ts-expect-error - TODO: the marketplaceType needs to be exported from the marketplace-sdk
           openBuyModal({
             collectionAddress,
             chainId,
