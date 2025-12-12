@@ -26,7 +26,10 @@ export default function ConnectButton(props: ConnectButtonProps) {
     <Button
       shape="square"
       variant={props.variant || 'secondary'}
-      className={cn(props.className)}
+      className={cn(
+        props.className,
+        'bg-background-raised! hover:bg-background-raised/80',
+      )}
       size={props.size}
       onClick={() => setOpenConnectModal(true)}
     >

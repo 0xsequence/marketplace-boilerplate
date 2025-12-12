@@ -65,8 +65,10 @@ export default function CollectibleTabs({ children }: CollectibleTabsProps) {
       <div className="border-b border-border-normal mb-4">
         <Tabs defaultValue={defaultTab} onValueChange={handleTabChange}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="offers">
+            <TabsTrigger className="text-xs" value="details">
+              Details
+            </TabsTrigger>
+            <TabsTrigger className="text-xs" value="offers">
               <div className="relative">
                 Offers
                 {highestOffer && (
@@ -76,7 +78,9 @@ export default function CollectibleTabs({ children }: CollectibleTabsProps) {
                 )}
               </div>
             </TabsTrigger>
-            <TabsTrigger value="listings">Listings</TabsTrigger>
+            <TabsTrigger className="text-xs" value="listings">
+              Listings
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>

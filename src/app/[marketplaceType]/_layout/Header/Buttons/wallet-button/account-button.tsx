@@ -63,7 +63,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
           className={cn(
             isOpen
               ? 'bg-background-raised'
-              : 'bg-button-glass hover:bg-button-glass/80',
+              : 'bg-background-raised! hover:bg-background-raised/80',
             'px-2.5',
           )}
           {...props}
@@ -92,10 +92,10 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         }}
         collisionPadding={16}
         onInteractOutside={() => setIsOpen(false)}
-        className="rounded-[8px] mt-4 md:mt-[3px] bg-background-raised"
+        className="rounded-[8px] mt-4 md:mt-[3px]  border-none p-2"
       >
         <DropdownButton
-          className="w-full bg-background-raised hover:bg-background-raised/80"
+          className="w-full bg-background-active hover:bg-background-active/80"
           onClick={handleCopyAddress}
           shape="square"
           size="sm"
@@ -105,7 +105,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         </DropdownButton>
 
         <DropdownButton
-          className="w-full bg-background-raised hover:bg-background-raised/80"
+          className="w-full bg-background-active hover:bg-background-active/80"
           onClick={() => router.push('/market/inventory')}
           shape="square"
           size="sm"
@@ -115,7 +115,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         </DropdownButton>
 
         <DropdownButton
-          className="w-full bg-background-raised hover:bg-background-raised/80"
+          className="w-full bg-background-active hover:bg-background-active/80"
           onClick={() => openWallet()}
           shape="square"
           size="sm"
@@ -125,7 +125,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         </DropdownButton>
 
         <DropdownButton
-          className="w-full bg-background-raised hover:bg-background-raised/80"
+          className="w-full bg-background-active hover:bg-background-active/80"
           onClick={() => disconnect()}
           shape="square"
           size="sm"

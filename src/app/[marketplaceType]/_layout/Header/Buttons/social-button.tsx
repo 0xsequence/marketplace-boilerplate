@@ -54,7 +54,7 @@ export const SocialButton = ({
       icon={icon}
       variant="secondary"
       size="sm"
-      className="bg-button-glass rounded-lg hover:bg-button-glass/80"
+      className="bg-background-raised! rounded-lg hover:bg-background-raised/80"
     >
       <a target="_blank" href={href} rel="noopener noreferrer" />
     </IconButton>
