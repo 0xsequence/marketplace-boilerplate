@@ -164,6 +164,9 @@ export const ssrClient = async () => {
               sequenceWallet: {
                 env: defaultEnv,
               },
+              trails: {
+                env: defaultEnv,
+              },
             },
           },
         },
