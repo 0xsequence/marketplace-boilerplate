@@ -50,6 +50,7 @@ const MarketCollectionHeader = ({
   const { filterOptions, searchText, showListedOnly } = useFilterState();
 
   const { data: filteredCollectiblesCount } = useCountOfCollectables({
+    chainId,
     collectionAddress,
     filter: {
       searchText,
