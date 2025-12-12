@@ -19,6 +19,7 @@ import type { Address } from 'viem';
 
 const Metrics = () => {
   const params = useParams();
+  const chainId = Number(params.chainId);
   const marketplaceType = params.marketplaceType as MarketplaceType;
   const collectionData = useMarketplaceCollection(marketplaceType);
   const marketplaceCollection = collectionData.data;
@@ -28,6 +29,7 @@ const Metrics = () => {
   });
 
   const { isLoading: isTotalLoading, data: total } = useCountOfCollectables({
+    chainId,
     collectionAddress,
   });
 
@@ -35,6 +37,7 @@ const Metrics = () => {
     isLoading: isListedCollectiblesCountLoading,
     data: listedCollectiblesCount,
   } = useCountOfCollectables({
+    chainId,
     collectionAddress,
     filter: {
       includeEmpty: false,
@@ -48,6 +51,9 @@ const Metrics = () => {
             / auto auto auto auto`
     : `[row1-start] "collection-metrics-listed collection-metrics-floor" auto [row1-end]
             [row2-start] "collection-metrics-volume collection-metrics-owners" auto [row2-end]`;
+
+  const hasListings =
+    !isListedCollectiblesCountLoading && (listedCollectiblesCount ?? 0) > 0;
 
   return (
     <Grid.Child name="collection-metrics" className="col-span-2">
@@ -64,12 +70,12 @@ const Metrics = () => {
             </div>
           ) : (
             <Text className="text-sm text-secondary">
-              {listedCollectiblesCount} / {total}
+              {listedCollectiblesCount ?? 0} / {total ?? 0}
             </Text>
           )}
         </Grid.Child>
 
-        <FloorPriceMetric />
+        {hasListings && <FloorPriceMetric />}
       </Grid.Root>
     </Grid.Child>
   );
@@ -87,6 +93,7 @@ const FloorPriceMetric = () => {
   });
 
   const { isLoading: isFloorLoading, data: floor } = useFloorOrder({
+    chainId,
     collectionAddress: collectionAddress,
   });
   const { isLoading: isCurrencyLoading, data: floorCurrency } = useCurrency({
