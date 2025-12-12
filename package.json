@@ -13,7 +13,8 @@
     "start": "next start -p 4421",
     "check": "tsc --noEmit",
     "knip": "knip",
-    "env-file": "cp -n .env.example .env"
+    "env-file": "cp -n .env.example .env",
+    "sdk:prerelease-refresh": "pnpm remove @0xsequence/marketplace-sdk && pnpm add @0xsequence/marketplace-sdk@github:0xsequence/marketplace-sdk#pre-release"
   },
   "dependencies": {
     "0xsequence": "^2.3.38",
