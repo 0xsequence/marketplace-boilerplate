@@ -42,7 +42,7 @@ importers:
         version: 2.3.38
       '@0xsequence/marketplace-sdk':
         specifier: github:0xsequence/marketplace-sdk#pre-release
-        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/1195d16702e5838af9e5b95f2683d4bbed45b3cb(3f509c181984752bfe32e134fc55fa60)
+        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/5f3580c3335fb43e3859aa696481d9ff5a12c2d1(3f509c181984752bfe32e134fc55fa60)
       '@0xsequence/metadata':
         specifier: ^2.3.38
         version: 2.3.38
@@ -178,8 +178,8 @@ packages:
     peerDependencies:
       ethers: '>=6'
 
-  0xtrails@0.8.8:
-    resolution: {integrity: sha512-n/HShEqiIapMJ1AGwOR9CFjV0cZRhOYxKbixX8tpIUxr6fWBCzV7VbVkJiAfO2j6Nj5CKIhUg96hf1OFNDr69Q==}
+  0xtrails@0.9.3:
+    resolution: {integrity: sha512-TFj8x2H6jndKYzi55LTSOHjJvqJs1vBdVAJPVbcEecoyIXLspdu01knqzwpngso1qbtfaTXpCTj8DkYEfNDdeQ==}
     peerDependencies:
       '@tanstack/react-query': 5.90.9
       ethers: 6.15.0
@@ -312,8 +312,8 @@ packages:
   '@0xsequence/indexer@3.0.0-beta.4':
     resolution: {integrity: sha512-ezuUgyYvN+F5DdS6Pn+bH7477cSGk2x71gDiV0XXuoDoh3i9OXfUsP/oaBLnf4WCLoy+3QwWAjfhel4VpDcpyA==}
 
-  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/1195d16702e5838af9e5b95f2683d4bbed45b3cb':
-    resolution: {tarball: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/1195d16702e5838af9e5b95f2683d4bbed45b3cb}
+  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/5f3580c3335fb43e3859aa696481d9ff5a12c2d1':
+    resolution: {tarball: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/5f3580c3335fb43e3859aa696481d9ff5a12c2d1}
     version: 1.2.1
     peerDependencies:
       0xsequence: 2.3.38
@@ -321,7 +321,7 @@ packages:
       '@0xsequence/checkout': 5.4.8
       '@0xsequence/connect': 5.4.8
       '@0xsequence/design-system': 3.1.7
-      '@0xsequence/indexer': 3.0.0-beta.4
+      '@0xsequence/indexer': 2.3.38
       '@0xsequence/metadata': 2.3.38
       '@0xsequence/network': 2.3.38
       '@0xsequence/waas': 2.3.38
@@ -412,8 +412,8 @@ packages:
     peerDependencies:
       ethers: '>=6'
 
-  '@0xtrails/api@0.8.6':
-    resolution: {integrity: sha512-rN3aDWxRbOXrLYs8rTDVA41TN6dVsJ0rCVj8ZTRwHywDGlJf7OqOmquJkHWEIAHv0/87fvf8QrAzd9D+B7LgXQ==}
+  '@0xtrails/api@0.9.1':
+    resolution: {integrity: sha512-JQ0+VL2Ik/BeUOfcA63cENi9NyGKxUstmZUxunqIm8dZBI67LqfZO5pFaT/FhWmgP0/ptMYiEl3DXgIthM/h1A==}
 
   '@adraffy/ens-normalize@1.10.1':
     resolution: {integrity: sha512-96Z2IP3mYmF1Xg2cDm8f1gWGf/HUVedQ3FMifV4kG/PQ4yEP51xDtRAEfhVNt5f/uzpNkZHwWQuUcu6D6K+Ekw==}
@@ -4568,6 +4568,9 @@ packages:
   path-to-regexp@6.3.0:
     resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
 
+  path-to-regexp@8.3.0:
+    resolution: {integrity: sha512-7jdwVIRtsP8MYpdXSwOS0YdD0Du+qOoF/AEPIt88PcCFrZCzx41oxku1jD88hZBwbNUIEfpqvuhjFaMAqMTWnA==}
+
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
 
@@ -5747,13 +5750,13 @@ snapshots:
       '@0xsequence/wallet': 2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       ethers: 6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
-  0xtrails@0.8.8(0xsequence@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.38)(@0xsequence/metadata@2.3.38)(@0xsequence/network@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.0.9)(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(zod@4.1.13))(zod@4.1.13):
+  0xtrails@0.9.3(0xsequence@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.38)(@0xsequence/metadata@2.3.38)(@0xsequence/network@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.0.9)(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(zod@4.1.13))(zod@4.1.13):
     dependencies:
       '@0xsequence/connect': 5.4.4(c4516c39c1c3a50935d90244b67ed106)
       '@0xsequence/hooks': 5.4.4(@0xsequence/api@2.3.38)(@0xsequence/indexer@3.0.0-beta.4)(@0xsequence/metadata@2.3.38)(@0xsequence/network@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@tanstack/react-query@5.90.9(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))
       '@0xsequence/indexer': 3.0.0-beta.4
       '@0xsequence/wallet-primitives': 3.0.0-beta.4(typescript@5.9.3)(zod@4.1.13)
-      '@0xtrails/api': 0.8.6
+      '@0xtrails/api': 0.9.1
       '@databeat/tracker': 0.9.3
       '@radix-ui/react-tooltip': 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tanstack/react-query': 5.90.9(react@19.2.0)
@@ -6018,10 +6021,10 @@ snapshots:
 
   '@0xsequence/indexer@3.0.0-beta.4': {}
 
-  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/1195d16702e5838af9e5b95f2683d4bbed45b3cb(3f509c181984752bfe32e134fc55fa60)':
+  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/5f3580c3335fb43e3859aa696481d9ff5a12c2d1(3f509c181984752bfe32e134fc55fa60)':
     dependencies:
       0xsequence: 2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      0xtrails: 0.8.8(0xsequence@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.38)(@0xsequence/metadata@2.3.38)(@0xsequence/network@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.0.9)(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(zod@4.1.13))(zod@4.1.13)
+      0xtrails: 0.9.3(0xsequence@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.38)(@0xsequence/metadata@2.3.38)(@0xsequence/network@2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.0))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.0.9)(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(zod@4.1.13))(zod@4.1.13)
       '@0xsequence/api': 2.3.38
       '@0xsequence/api-client': link:../api
       '@0xsequence/checkout': 5.4.8(fb46ad1adfe4c4a374cf78c8801aa588)
@@ -6042,6 +6045,7 @@ snapshots:
       clsx: 2.1.1
       date-fns: 4.1.0
       dnum: 2.15.0
+      path-to-regexp: 8.3.0
       react: 19.2.0
       react-day-picker: 9.11.1(react@19.2.0)
       react-dom: 19.2.0(react@19.2.0)
@@ -6187,7 +6191,7 @@ snapshots:
       '@0xsequence/utils': 2.3.38(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       ethers: 6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
-  '@0xtrails/api@0.8.6': {}
+  '@0xtrails/api@0.9.1': {}
 
   '@adraffy/ens-normalize@1.10.1': {}
 
@@ -11622,6 +11626,8 @@ snapshots:
   path-to-regexp@6.1.0: {}
 
   path-to-regexp@6.3.0: {}
+
+  path-to-regexp@8.3.0: {}
 
   pend@1.2.0: {}
 

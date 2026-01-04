@@ -59,15 +59,9 @@ export const useBuyHandler = ({
       collectionAddress: buyParams.collectionAddress,
       salesContractAddress: buyParams.salesContractAddress,
       cardType: 'shop',
-      quantityRemaining: BigInt(supplyCap),
       hideQuantitySelector: true,
       item: {
         tokenId: buyParams.tokenId,
-        quantity: BigInt(buyParams.quantity),
-      },
-      salePrice: {
-        amount: buyParams.salePrice.amount,
-        currencyAddress: buyParams.salePrice.currencyAddress,
       },
     });
   };
@@ -80,14 +74,8 @@ export const useBuyHandler = ({
         salesContractAddress: cachedBuyAction.salesContractAddress,
         hideQuantitySelector: true,
         cardType: 'shop',
-        quantityRemaining: BigInt(supplyCap),
         item: {
           tokenId: cachedBuyAction.tokenId,
-          quantity: BigInt(cachedBuyAction.quantity),
-        },
-        salePrice: {
-          amount: cachedBuyAction.salePrice.amount,
-          currencyAddress: cachedBuyAction.salePrice.currencyAddress,
         },
       });
       setCachedBuyAction(null);

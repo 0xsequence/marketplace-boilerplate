@@ -208,15 +208,8 @@ export default function ShopCollectibleActions({
               hideQuantitySelector: true,
               item: {
                 tokenId: BigInt(tokenId),
-                quantity: 1n,
               },
               cardType: 'shop',
-              salePrice: {
-                amount: primarySaleItem?.priceAmount ?? 0n,
-                currencyAddress: primarySaleItem?.currencyAddress ?? '0x',
-              },
-              // TODO: This is 0 for unlimited supply, fix it
-              quantityRemaining: primarySaleItem?.supply ?? 0n,
             })
           }
         >
@@ -317,14 +310,8 @@ export default function ShopCollectibleActions({
                 hideQuantitySelector: true,
                 item: {
                   tokenId: BigInt(tokenId),
-                  quantity: 1n,
                 },
                 cardType: 'shop',
-                salePrice: {
-                  amount: primarySaleItem?.priceAmount ?? 0n,
-                  currencyAddress: primarySaleItem?.currencyAddress ?? '0x',
-                },
-                quantityRemaining: primarySaleItem?.supply ?? 0n,
               })
             }
           >
