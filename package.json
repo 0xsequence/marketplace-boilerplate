@@ -85,7 +85,9 @@
       "unrs-resolver"
     ],
     "patchedDependencies": {
-      "@vercel/next@4.11.0": "patches/@vercel__next@4.11.0.patch"
+      "@vercel/next@4.11.0": "patches/@vercel__next@4.11.0.patch",
+      "@0xsequence/design-system@3.1.7": "patches/@0xsequence__design-system@3.1.7.patch",
+      "@0xsequence/wallet-widget@5.4.8": "patches/@0xsequence__wallet-widget@5.4.8.patch"
     }
   }
 }

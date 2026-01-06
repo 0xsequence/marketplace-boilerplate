@@ -1,0 +1,31 @@
+diff --git a/dist/index.js b/dist/index.js
+index af93edd3aabd43817b58893bf3febb370f2b84db..0ece7edcfd5c41586b836e44b057a70b5a11c345 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -110,7 +110,7 @@ var ThemeProvider = (props) => {
+       resolvedTheme,
+       container,
+       setTheme: (theme2) => {
+-        if (storageKey) {
++        if (storageKey && typeof localStorage !== "undefined") {
+           localStorage.setItem(storageKey, theme2);
+         }
+         setTheme(theme2);
+@@ -143,7 +143,7 @@ var setThemeVars = (element, props) => {
+   });
+ };
+ var getPersistedTheme = (storageKey) => {
+-  if (!storageKey) {
++  if (!storageKey || typeof localStorage === "undefined") {
+     return null;
+   }
+   const persistedTheme = localStorage.getItem(storageKey);
+@@ -152,7 +152,7 @@ var getPersistedTheme = (storageKey) => {
+   }
+   return null;
+ };
+-var getSystemTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
++var getSystemTheme = () => typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+ 
+ // src/components/Alert/Alert.tsx
+ import { cva as cva5 } from "class-variance-authority";

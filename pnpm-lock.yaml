@@ -11,6 +11,12 @@ overrides:
   '@0xsequence/design-system-v2': npm:@0xsequence/design-system@2.1.11
 
 patchedDependencies:
+  '@0xsequence/design-system@3.1.7':
+    hash: e1e22360fb73e733031368a0477540ca599dc6a99ebc8863248ef84c77e8ebaf
+    path: patches/@0xsequence__design-system@3.1.7.patch
+  '@0xsequence/wallet-widget@5.4.8':
+    hash: 05ebda8cce35bec075bacbb4483d3d49c3ecde80f48aa49c1ed75f0d0b1f4246
+    path: patches/@0xsequence__wallet-widget@5.4.8.patch
   '@vercel/next@4.11.0':
     hash: 6d82dcf4e38040e930e7e718ad4307b1190f25b41d0c414e69830cd4a62011dd
     path: patches/@vercel__next@4.11.0.patch
@@ -33,7 +39,7 @@ importers:
         version: 5.4.8(80b9c13ac4097bfd91934ab3d3af1d3a)
       '@0xsequence/design-system':
         specifier: ^3.1.7
-        version: 3.1.7(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)
+        version: 3.1.7(patch_hash=e1e22360fb73e733031368a0477540ca599dc6a99ebc8863248ef84c77e8ebaf)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)
       '@0xsequence/hooks':
         specifier: ^5.4.8
         version: 5.4.8(@0xsequence/api@2.3.39)(@0xsequence/indexer@2.3.39)(@0xsequence/metadata@2.3.39)(@0xsequence/network@2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)))(@tanstack/react-query@5.90.9(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(viem@2.41.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))
@@ -42,7 +48,7 @@ importers:
         version: 2.3.39
       '@0xsequence/marketplace-sdk':
         specifier: github:0xsequence/marketplace-sdk#pre-release
-        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/bd3364a20f10472feed7504ebc251a27b17dc9c3(89ea72610849f3d528acef2255e51c00)
+        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/bd3364a20f10472feed7504ebc251a27b17dc9c3(634593ff9066c807c7e43b51f9e2e6b7)
       '@0xsequence/metadata':
         specifier: ^2.3.39
         version: 2.3.39
@@ -51,7 +57,7 @@ importers:
         version: 2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       '@0xsequence/wallet-widget':
         specifier: ^5.4.8
-        version: 5.4.8(61a7e63f5921d8e882a126b5387d6f5c)
+        version: 5.4.8(patch_hash=05ebda8cce35bec075bacbb4483d3d49c3ecde80f48aa49c1ed75f0d0b1f4246)(61a7e63f5921d8e882a126b5387d6f5c)
       '@databeat/tracker':
         specifier: ^0.9.3
         version: 0.9.3
@@ -5962,7 +5968,7 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  '@0xsequence/design-system@3.1.7(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)':
+  '@0xsequence/design-system@3.1.7(patch_hash=e1e22360fb73e733031368a0477540ca599dc6a99ebc8863248ef84c77e8ebaf)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@radix-ui/react-aspect-ratio': 1.1.8(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -6033,7 +6039,7 @@ snapshots:
 
   '@0xsequence/indexer@3.0.0-beta.4': {}
 
-  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/bd3364a20f10472feed7504ebc251a27b17dc9c3(89ea72610849f3d528acef2255e51c00)':
+  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/bd3364a20f10472feed7504ebc251a27b17dc9c3(634593ff9066c807c7e43b51f9e2e6b7)':
     dependencies:
       0xsequence: 2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       0xtrails: 0.9.5(0xsequence@2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.39)(@0xsequence/metadata@2.3.39)(@0xsequence/network@2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@tanstack/react-query@5.90.9(react@19.2.3))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.3))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.1.0)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4))(zod@3.22.4)
@@ -6041,7 +6047,7 @@ snapshots:
       '@0xsequence/api-client': link:../api
       '@0xsequence/checkout': 5.4.8(307222d4db50fdc4fdbcc8083f5a7be2)
       '@0xsequence/connect': 5.4.8(80b9c13ac4097bfd91934ab3d3af1d3a)
-      '@0xsequence/design-system': 3.1.7(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)
+      '@0xsequence/design-system': 3.1.7(patch_hash=e1e22360fb73e733031368a0477540ca599dc6a99ebc8863248ef84c77e8ebaf)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.69.0(react@19.2.3))(react@19.2.3)
       '@0xsequence/indexer': 2.3.39
       '@0xsequence/metadata': 2.3.39
       '@0xsequence/network': 2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
@@ -6162,7 +6168,7 @@ snapshots:
       - typescript
       - zod
 
-  '@0xsequence/wallet-widget@5.4.8(61a7e63f5921d8e882a126b5387d6f5c)':
+  '@0xsequence/wallet-widget@5.4.8(patch_hash=05ebda8cce35bec075bacbb4483d3d49c3ecde80f48aa49c1ed75f0d0b1f4246)(61a7e63f5921d8e882a126b5387d6f5c)':
     dependencies:
       '@0xsequence/api': 2.3.39
       '@0xsequence/checkout': 5.4.8(307222d4db50fdc4fdbcc8083f5a7be2)

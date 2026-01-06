@@ -1,0 +1,60 @@
+diff --git a/dist/cjs/hooks/useSettings.js b/dist/cjs/hooks/useSettings.js
+index df26fc31c7b76be687b56f5393b68cffea7d2f36..5b79ce5932f69240f18836df553a8cdc52f92c55 100644
+--- a/dist/cjs/hooks/useSettings.js
++++ b/dist/cjs/hooks/useSettings.js
+@@ -50,6 +50,15 @@ const useSettings = () => {
+         let selectedWallets = allWallets;
+         let selectedNetworks = allNetworks;
+         let showCollections = false;
++        if (typeof localStorage === 'undefined') {
++            return {
++                hideUnlistedTokensObservable: (0, micro_observables_1.observable)(hideUnlistedTokens),
++                fiatCurrencyObservable: (0, micro_observables_1.observable)(fiatCurrency),
++                selectedWalletsObservable: (0, micro_observables_1.observable)(selectedWallets),
++                selectedNetworksObservable: (0, micro_observables_1.observable)(selectedNetworks),
++                showCollectionsObservable: (0, micro_observables_1.observable)(showCollections)
++            };
++        }
+         try {
+             const settingsStorage = localStorage.getItem(connect_1.LocalStorageKey.Settings);
+             const settings = JSON.parse(settingsStorage || '{}');
+@@ -144,6 +153,9 @@ const useSettings = () => {
+         updateLocalStorage();
+     };
+     const updateLocalStorage = () => {
++        if (typeof localStorage === 'undefined') {
++            return;
++        }
+         const newSettings = {
+             hideUnlistedTokens: hideUnlistedTokensObservable.get(),
+             fiatCurrency: fiatCurrencyObservable.get(),
+diff --git a/dist/esm/hooks/useSettings.js b/dist/esm/hooks/useSettings.js
+index af1953421e7220103da3e7a7bdf6c860ae5d9b20..3673783c48d1e445b05e4a1f997b411fdcdb0a38 100644
+--- a/dist/esm/hooks/useSettings.js
++++ b/dist/esm/hooks/useSettings.js
+@@ -47,6 +47,15 @@ export const useSettings = () => {
+         let selectedWallets = allWallets;
+         let selectedNetworks = allNetworks;
+         let showCollections = false;
++        if (typeof localStorage === 'undefined') {
++            return {
++                hideUnlistedTokensObservable: observable(hideUnlistedTokens),
++                fiatCurrencyObservable: observable(fiatCurrency),
++                selectedWalletsObservable: observable(selectedWallets),
++                selectedNetworksObservable: observable(selectedNetworks),
++                showCollectionsObservable: observable(showCollections)
++            };
++        }
+         try {
+             const settingsStorage = localStorage.getItem(LocalStorageKey.Settings);
+             const settings = JSON.parse(settingsStorage || '{}');
+@@ -141,6 +150,9 @@ export const useSettings = () => {
+         updateLocalStorage();
+     };
+     const updateLocalStorage = () => {
++        if (typeof localStorage === 'undefined') {
++            return;
++        }
+         const newSettings = {
+             hideUnlistedTokens: hideUnlistedTokensObservable.get(),
+             fiatCurrency: fiatCurrencyObservable.get(),
