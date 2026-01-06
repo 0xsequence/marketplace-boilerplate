@@ -118,7 +118,7 @@ const CollectionBalance = ({
 
     if (
       !collectionLoading &&
-      inventorySuccess &&
+      !inventoryIsLoading &&
       (!allCollectibles || allCollectibles.length === 0)
     ) {
       setBalance(collectionAddress, {
@@ -128,13 +128,7 @@ const CollectionBalance = ({
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    collectionLoading,
-    inventoryIsLoading,
-    setBalance,
-    allCollectibles,
-    inventorySuccess,
-  ]);
+  }, [collectionLoading, inventoryIsLoading, inventorySuccess]);
 
   if (
     !allCollectibles ||
@@ -267,7 +261,7 @@ const CollectionBalance = ({
             <div className="flex gap-2 items-center">
               <Media
                 assets={[collection?.logoURI]}
-                containerClassName="w-5 h-5 rounded-xl"
+                containerClassName="w-5 h-5 rounded-xl overflow-hidden"
                 shouldListenForLoad={false}
               />
 
