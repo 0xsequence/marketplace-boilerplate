@@ -72,7 +72,13 @@ export default function CollectibleTabs({ children }: CollectibleTabsProps) {
               <div className="relative">
                 Offers
                 {highestOffer && (
-                  <div className="absolute top-1 -right-2 rounded-full bg-brand-primary text-white w-3 h-3 flex items-center justify-center">
+                  <div
+                    className="absolute rounded-full bg-brand-primary text-white w-3 h-3 flex items-center justify-center"
+                    style={{
+                      top: -10,
+                      right: -10,
+                    }}
+                  >
                     <OfferIcon className="w-2 h-2" />
                   </div>
                 )}

@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Grid } from '~/components/grid';
 import CollectionAvatar from '~/components/icons/collection-avatar';
 import CustomNetworkImage from '~/components/network-image';
@@ -63,6 +65,7 @@ const MarketCollectionHeader = ({
   const name = sdkCollection?.name;
   const logo = sdkCollection?.logoURI;
   const image = sdkCollection?.extensions?.ogImage;
+  const [imageError, setImageError] = useState(false);
 
   if (collectionError) {
     return (
@@ -99,11 +102,12 @@ const MarketCollectionHeader = ({
 `}
         >
           <Grid.Child name="collection-image" className="flex items-center">
-            {logo ? (
+            {logo && !imageError ? (
               <Image
                 src={logo}
                 alt={name}
                 className="h-[60px] w-[60px] rounded-full"
+                onError={() => setImageError(true)}
               />
             ) : (
               <div className="flex rounded-full p-4 bg-background-secondary">

@@ -15,7 +15,7 @@ function CollectionSearch() {
 
   return (
     <>
-      <CollectionSearchInput className="w-[230px] hidden md:flex!" />
+      <CollectionSearchInput className="w-[250px] hidden md:flex!" />
 
       <IconButton
         variant="secondary"
