@@ -67,7 +67,11 @@ export const FilterBadges = () => {
         {priceFilters.map((priceFilter) => (
           <PriceBadge
             key={`price-${priceFilter.contractAddress}`}
-            priceFilter={priceFilter}
+            priceFilter={{
+              contractAddress: priceFilter.contractAddress,
+              min: priceFilter.min ? BigInt(priceFilter.min) : undefined,
+              max: priceFilter.max ? BigInt(priceFilter.max) : undefined,
+            }}
             chainId={chainId}
             collectionAddress={collectionAddress}
           />
