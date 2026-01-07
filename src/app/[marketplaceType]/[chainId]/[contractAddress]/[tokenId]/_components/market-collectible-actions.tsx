@@ -86,7 +86,11 @@ export const MarketCollectibleActions = ({
   });
 
   const isTokenOwned =
-    !isLoading && !owner.isLoading && owner.data === accountAddress;
+    !!accountAddress &&
+    !isLoading &&
+    !owner.isLoading &&
+    owner.data != null &&
+    owner.data === accountAddress;
   const showBuyNowCta = lowestListing && !userMadeLowestListing;
   const showSellCta = isTokenOwned && highestOffer && !userMadeHighestOffer;
 
@@ -122,6 +126,7 @@ export const MarketCollectibleActions = ({
 
   if (
     isLoading ||
+    owner.isLoading ||
     currencyLoading ||
     lowestListingLoading ||
     highestOfferLoading ||
