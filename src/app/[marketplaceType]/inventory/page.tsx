@@ -34,19 +34,32 @@ const InventoryPageContent = () => {
 
   // Filter out collections from shopCollections that already exist in marketCollections
   const shopCollections = allShopCollections.filter(
-    (shopCollection) =>
-      !marketCollections.some(
+    (shopCollection, index, self) => {
+      const existsInMarket = marketCollections.some(
         (marketCollection) =>
           marketCollection.chainId === shopCollection.chainId &&
-          marketCollection.itemsAddress === shopCollection.itemsAddress,
-      ),
+          marketCollection.itemsAddress.toLowerCase() ===
+            shopCollection.itemsAddress.toLowerCase(),
+      );
+
+      if (existsInMarket) return false;
+
+      const firstIndex = self.findIndex(
+        (c) =>
+          c.chainId === shopCollection.chainId &&
+          c.itemsAddress.toLowerCase() ===
+            shopCollection.itemsAddress.toLowerCase(),
+      );
+
+      return firstIndex === index;
+    },
   );
   const collectionsLength = marketCollections.length + shopCollections.length;
-
+  const fetchedCount = Object.values(balances).filter(
+    (balance) => balance.fetched,
+  ).length;
   const allBalancesFetched =
-    collectionsLength > 0 &&
-    Object.values(balances).filter((balance) => balance.fetched).length ===
-      collectionsLength;
+    collectionsLength > 0 && fetchedCount === collectionsLength;
 
   useEffect(() => {
     if (!config?.market.collections) {
@@ -68,15 +81,19 @@ const InventoryPageContent = () => {
       balance.balance.every((item) => item.balance === 0),
     ) && allBalancesFetched;
 
-  const hasTokensInCollection = (collectionAddress: string) => {
-    const balance = balances[collectionAddress as keyof typeof balances];
+  const hasTokensInCollection = (
+    collectionAddress: string,
+    chainId: number,
+  ) => {
+    const key = `${chainId}-${collectionAddress.toLowerCase()}`;
+    const balance = balances[key];
     return balance?.fetched && balance.balance.some((item) => item.balance > 0);
   };
   const hasTradableTokens = marketCollections.some((collection) =>
-    hasTokensInCollection(collection.itemsAddress),
+    hasTokensInCollection(collection.itemsAddress, collection.chainId),
   );
   const hasNonTradableTokens = shopCollections.some((collection) =>
-    hasTokensInCollection(collection.itemsAddress),
+    hasTokensInCollection(collection.itemsAddress, collection.chainId),
   );
 
   if (!accountAddress) {
@@ -107,9 +124,10 @@ const InventoryPageContent = () => {
             )}
           {marketCollections?.map((collection) => (
             <CollectionBalance
-              key={collection.itemsAddress}
+              key={`${collection.chainId}-${collection.itemsAddress}`}
               cardType="market"
               collectionAddress={collection.itemsAddress}
+              chainId={collection.chainId}
               isTradable={true}
             />
           ))}
@@ -123,14 +141,17 @@ const InventoryPageContent = () => {
               Non-Tradable Collectibles
             </Text>
           )}
-          {shopCollections?.map((collection) => (
-            <CollectionBalance
-              key={collection.itemsAddress}
-              cardType="inventory-non-tradable"
-              collectionAddress={collection.itemsAddress}
-              isTradable={false}
-            />
-          ))}
+          {shopCollections?.map((collection) => {
+            return (
+              <CollectionBalance
+                key={`${collection.chainId}-${collection.itemsAddress}`}
+                cardType="inventory-non-tradable"
+                collectionAddress={collection.itemsAddress}
+                chainId={collection.chainId}
+                isTradable={false}
+              />
+            );
+          })}
         </div>
       )}
     </div>

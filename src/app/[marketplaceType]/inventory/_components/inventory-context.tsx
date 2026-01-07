@@ -18,8 +18,8 @@ type Balance = {
 };
 
 export interface InventoryState {
-  // balances: <collectionAddress>: <balance>
-  balances: Record<Address, Balance>;
+  // balances: <chainId-collectionAddress>: <balance>
+  balances: Record<string, Balance>;
   listedOnly: boolean;
   searchText: string;
   totalCollections: number;
@@ -28,7 +28,11 @@ export interface InventoryState {
 export interface InventoryContextState extends InventoryState {
   toggleListedOnly: () => void;
   setSearchText: (value: string) => void;
-  setBalance: (collectionAddress: Address, balance: Balance) => void;
+  setBalance: (
+    collectionAddress: Address,
+    chainId: number,
+    balance: Balance,
+  ) => void;
   setTotalCollections: (total: number) => void;
 }
 
@@ -70,9 +74,11 @@ export const InventoryProvider: React.FC<{
   }, []);
 
   const setBalance = useCallback(
-    (collectionAddress: Address, balance: Balance) => {
+    (collectionAddress: Address, chainId: number, balance: Balance) => {
       setInventoryState((prev) => {
-        const prevCollection = prev.balances[collectionAddress];
+        // Use composite key: chainId-address
+        const key = `${chainId}-${collectionAddress.toLowerCase()}`;
+        const prevCollection = prev.balances[key];
 
         const mergedBalance = {
           ...balance,
@@ -93,7 +99,7 @@ export const InventoryProvider: React.FC<{
           ...prev,
           balances: {
             ...prev.balances,
-            [collectionAddress]: mergedBalance,
+            [key]: mergedBalance,
           },
         };
       });

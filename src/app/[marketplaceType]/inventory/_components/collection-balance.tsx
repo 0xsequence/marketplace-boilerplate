@@ -43,23 +43,27 @@ type CollectionBalanceProps = {
   collectionAddress: Address;
   cardType: 'market' | 'inventory-non-tradable';
   isTradable: boolean;
+  chainId: number;
 };
 
 const CollectionBalance = ({
   collectionAddress,
   cardType,
   isTradable,
+  chainId,
 }: CollectionBalanceProps) => {
   const { data: config } = useMarketplaceConfig();
-  const marketCollections = config?.market.collections || [];
   const shopCollections = config?.shop.collections || [];
-  const allCollections = [...marketCollections, ...shopCollections];
-  const chainId = allCollections.find((c) =>
-    compareAddress(c.itemsAddress, collectionAddress),
-  )?.chainId;
-  const shopCollection = shopCollections.find((c) =>
-    compareAddress(c.itemsAddress, collectionAddress),
-  );
+
+  // Find the shop collection if it's non-tradable (for saleAddress)
+  const shopCollection = !isTradable
+    ? shopCollections.find(
+        (c) =>
+          compareAddress(c.itemsAddress, collectionAddress) &&
+          c.chainId === chainId,
+      )
+    : undefined;
+
   const saleAddress = shopCollection?.saleAddress;
   const marketplaceType = cardType === 'market' ? 'market' : 'shop';
 
@@ -80,7 +84,7 @@ const CollectionBalance = ({
     allCollectibles,
     isSuccess: inventorySuccess,
   } = useListInventoryCardData({
-    chainId: chainId!,
+    chainId: chainId,
     collectionAddress,
     collectionType,
     marketplaceType: 'market',
@@ -98,11 +102,15 @@ const CollectionBalance = ({
   }, [isMd]);
 
   useEffect(() => {
-    if (!collectionLoading && inventorySuccess && allCollectibles?.length > 0) {
+    if (collectionLoading || inventoryIsLoading) {
+      return;
+    }
+
+    if (inventorySuccess && allCollectibles?.length > 0) {
       const lastCollectible = allCollectibles[allCollectibles.length - 1];
 
       for (const collectible of allCollectibles) {
-        setBalance(collectionAddress, {
+        setBalance(collectionAddress, chainId, {
           balance: [
             {
               collectibleId: collectible.metadata.tokenId,
@@ -114,21 +122,20 @@ const CollectionBalance = ({
             collectible.metadata.tokenId === lastCollectible?.metadata.tokenId,
         });
       }
-    }
-
-    if (
-      !collectionLoading &&
-      !inventoryIsLoading &&
-      (!allCollectibles || allCollectibles.length === 0)
-    ) {
-      setBalance(collectionAddress, {
+    } else {
+      setBalance(collectionAddress, chainId, {
         balance: [],
         decimals: 0,
         fetched: true,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionLoading, inventoryIsLoading, inventorySuccess]);
+  }, [
+    collectionLoading,
+    inventoryIsLoading,
+    inventorySuccess,
+    allCollectibles,
+  ]);
 
   if (
     !allCollectibles ||
