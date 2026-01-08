@@ -45,6 +45,7 @@
     "nanostores": "^1.1.0",
     "next": "15.3.6",
     "nuqs": "2.8.1",
+    "quikdown": "^1.1.1",
     "radash": "^12.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

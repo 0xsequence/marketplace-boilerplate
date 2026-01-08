@@ -41,6 +41,7 @@
     "next-env.d.ts",
     "environment.d.ts",
     "model-viewer.d.ts",
+    "quikdown.d.ts",
     "sentry.client.config.ts",
     "*.d.ts",
     "src/**/*.ts",

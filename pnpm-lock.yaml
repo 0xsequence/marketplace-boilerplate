@@ -109,6 +109,9 @@ importers:
       nuqs:
         specifier: 2.8.1
         version: 2.8.1(next@15.3.6(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      quikdown:
+        specifier: ^1.1.1
+        version: 1.1.1
       radash:
         specifier: ^12.1.1
         version: 12.1.1
@@ -4787,6 +4790,9 @@ packages:
 
   quick-format-unescaped@4.0.4:
     resolution: {integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==}
+
+  quikdown@1.1.1:
+    resolution: {integrity: sha512-mawqm/q+zC/orjb+b9XH/yHY0+QtC438ryTeFBtolVKtacKZCQk8Fa6s4K2kHTq4pvq/ikcgUW5lapRG4yM0ww==}
 
   radash@12.1.1:
     resolution: {integrity: sha512-h36JMxKRqrAxVD8201FrCpyeNuUY9Y5zZwujr20fFO77tpUtGa6EZzfKw/3WaiBX95fq7+MpsuMLNdSnORAwSA==}
@@ -11772,6 +11778,8 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   quick-format-unescaped@4.0.4: {}
+
+  quikdown@1.1.1: {}
 
   radash@12.1.1: {}
 
