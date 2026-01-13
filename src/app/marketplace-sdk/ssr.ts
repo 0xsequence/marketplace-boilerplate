@@ -1,6 +1,5 @@
 'use server';
 
-import type { LookupMarketplaceArgs } from './builder.gen';
 import { extractProjectId } from './extract-project-id';
 import { extractUserAddressFromCookies } from './extractUserAddressFromCookies';
 import { getBuilderApiUrl, getBuilderFEUrl } from './get-builder-url';
@@ -24,8 +23,7 @@ export const ssrClient = async () => {
     process.env.BUILDER_API_KEY, // For staging/production
   );
 
-  const lookupMarketplaceArgs: LookupMarketplaceArgs = process.env
-    .PROJECT_ACCESS_KEY
+  const lookupMarketplaceArgs = process.env.PROJECT_ACCESS_KEY
     ? {
         projectId: extractProjectId(process.env.PROJECT_ACCESS_KEY),
         userAddress: extractUserAddressFromCookies(cookie),

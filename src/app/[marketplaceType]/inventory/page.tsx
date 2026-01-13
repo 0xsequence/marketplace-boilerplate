@@ -12,7 +12,7 @@ import {
   InventoryProvider,
   useInventory,
 } from './_components/inventory-context';
-import { Spinner, Text } from '@0xsequence/design-system';
+import { Text } from '@0xsequence/design-system';
 import { useMarketplaceConfig } from '@0xsequence/marketplace-sdk/react';
 import { useAccount } from 'wagmi';
 

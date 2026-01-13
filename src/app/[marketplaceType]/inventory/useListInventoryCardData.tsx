@@ -41,7 +41,7 @@ const useInventoryData = (props: {
   const { accountAddress, collectionAddress, chainId, enabled } = props;
 
   const inventoryQuery = useInventory({
-    accountAddress: accountAddress!,
+    userAddress: accountAddress,
     collectionAddress,
     chainId,
     query: { enabled },

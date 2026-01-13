@@ -13,7 +13,7 @@ import CustomSkeleton from '~/components/skeleton';
 import { useIsMinWidth } from '~/hooks/ui/use-is-min-width';
 
 import { useListInventoryCardData } from '../useListInventoryCardData';
-import { useInventory } from './inventory-context';
+import { useInventory as useInventoryContext } from './inventory-context';
 import { Separator } from '@0xsequence/design-system';
 import { compareAddress, ContractType } from '@0xsequence/marketplace-sdk';
 import {
@@ -67,11 +67,11 @@ const CollectionBalance = ({
   const saleAddress = shopCollection?.saleAddress;
   const marketplaceType = cardType === 'market' ? 'market' : 'shop';
 
-  const { setBalance } = useInventory();
+  const { setBalance } = useInventoryContext();
 
   const { data: collection, isLoading: collectionLoading } = useCollection({
     collectionAddress: collectionAddress,
-    chainId: chainId ? Number(chainId) : undefined,
+    chainId,
   });
 
   const collectionType = collection?.type
@@ -106,11 +106,13 @@ const CollectionBalance = ({
       return;
     }
 
+    const balanceKey = `${chainId}-${collectionAddress.toLowerCase()}`;
+
     if (inventorySuccess && allCollectibles?.length > 0) {
       const lastCollectible = allCollectibles[allCollectibles.length - 1];
 
       for (const collectible of allCollectibles) {
-        setBalance(collectionAddress, chainId, {
+        setBalance(balanceKey, {
           balance: [
             {
               collectibleId: collectible.metadata.tokenId,
@@ -123,7 +125,7 @@ const CollectionBalance = ({
         });
       }
     } else {
-      setBalance(collectionAddress, chainId, {
+      setBalance(balanceKey, {
         balance: [],
         decimals: 0,
         fetched: true,
@@ -232,18 +234,10 @@ const CollectionBalance = ({
             (() => {
               return (
                 <CollectibleCard
-                  tokenId={card.tokenId}
-                  chainId={card.chainId}
-                  collectionAddress={card.collectionAddress}
-                  collectionType={card.collectionType}
-                  assetSrcPrefixUrl={card.assetSrcPrefixUrl}
-                  cardLoading={card.cardLoading}
+                  {...card}
                   cardType="inventory-non-tradable"
-                  balance={card.balance}
-                  balanceIsLoading={card.balanceIsLoading}
                   collectibleMetadata={{
                     ...card.collectible.metadata,
-                    source: 'sequence',
                   }}
                 />
               );

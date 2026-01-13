@@ -4,9 +4,14 @@ import { ErrorBoundary } from 'react-error-boundary';
 import CustomSkeleton from '~/components/skeleton';
 
 import { formatUnixTimestamp } from '../../_util/format-unix-timestamp';
-import { standardizeProperties } from '../../_util/standardize-properties';
 import { Text } from '@0xsequence/design-system';
 import type { TokenMetadata } from '@0xsequence/marketplace-sdk';
+import {
+  processProperties,
+  processAttributes,
+  type StandardizedAttribute,
+  type StandardizedProperty,
+} from '@0xsequence/marketplace-sdk/react';
 import { capitalize } from 'radash';
 
 type PropertiesProps = {
@@ -35,9 +40,22 @@ function PropertiesContent({ tokenMetadata, isLoading }: PropertiesProps) {
     tokenMetadata?.attributes.length === 0 &&
     Object.keys(tokenMetadata?.properties || {}).length === 0 &&
     !isLoading;
-  const standardizedProperties = tokenMetadata
-    ? standardizeProperties(tokenMetadata)
+  // Process attributes and properties separately
+  const attributes = tokenMetadata
+    ? processAttributes(tokenMetadata.attributes)
     : {};
+  const properties = tokenMetadata
+    ? processProperties(tokenMetadata.properties)
+    : {};
+
+  // Combine both for display (attributes take precedence for display_type)
+  const allProperties: Record<
+    string,
+    StandardizedAttribute | StandardizedProperty
+  > = {
+    ...properties,
+    ...attributes,
+  };
 
   if (propertiesNotSet) {
     return (
@@ -50,13 +68,8 @@ function PropertiesContent({ tokenMetadata, isLoading }: PropertiesProps) {
   return (
     <div className="grid grid-cols-3 gap-3">
       {isLoading && <LoadingProperties count={3} />}
-      {Object.entries(standardizedProperties).map(([key, property]) => (
-        <Property
-          key={key}
-          name={property.name}
-          value={property.value}
-          display_type={property.display_type}
-        />
+      {Object.entries(allProperties).map(([key, property]) => (
+        <Property key={key} name={property.name} value={property.value} />
       ))}
     </div>
   );
@@ -88,7 +101,7 @@ function Property({
   return (
     <div className="bg-background-secondary backdrop-blur-xs flex flex-col gap-1 px-3 py-2 rounded-xl">
       <Text className="text-xs text-muted font-medium">{capitalize(name)}</Text>
-      <Text className="text-sm text-secondary font-bold break-words whitespace-pre-wrap">
+      <Text className="text-sm text-secondary font-bold wrap-break-word whitespace-pre-wrap">
         {formattedValue}
       </Text>
     </div>

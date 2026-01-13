@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 import CopyButton from '~/components/copy-button';
 import { Portal } from '~/components/portal';
 import { useIsMinWidth } from '~/hooks/ui/use-is-min-width';
-import { useMarketplaceCollection } from '~/hooks/use-marketplace-collection';
-import { getCollectionAddress } from '~/lib/utils';
 import type { CollectionParams, MarketplaceType } from '~/types';
 import getStickyFilterSidebarTop from '~/utils/get-sticky-filter-sidebar-top';
 
@@ -30,16 +28,19 @@ import {
 } from '@0xsequence/marketplace-sdk/react/hooks';
 import { type ChainId, networks } from '@0xsequence/network';
 import { useParams } from 'next/navigation';
+import type { Address } from 'viem';
 
-export const FiltersSidebar = () => {
+type FiltersSidebarProps = {
+  collectionAddress: Address;
+};
+
+export const FiltersSidebar = ({ collectionAddress }: FiltersSidebarProps) => {
   const isMD = useIsMinWidth('@md');
   const { filtersSidebarOpen } = useSidebarState();
   const params = useParams();
-  const marketplaceType = params.marketplaceType as MarketplaceType;
-  const { data: collection } = useMarketplaceCollection(marketplaceType);
   const { data: collectionData } = useCollection({
     chainId: Number(params.chainId),
-    collectionAddress: collection?.itemsAddress,
+    collectionAddress: collectionAddress,
   });
 
   const stickyFilterSidebarTop = getStickyFilterSidebarTop({
@@ -52,7 +53,9 @@ export const FiltersSidebar = () => {
   }
 
   if (!isMD) {
-    return <FiltersModalsForSmallScreens />;
+    return (
+      <FiltersModalsForSmallScreens collectionAddress={collectionAddress} />
+    );
   }
 
   return (
@@ -63,22 +66,17 @@ export const FiltersSidebar = () => {
         maxHeight: `calc(100vh - ${stickyFilterSidebarTop})`,
       }}
     >
-      <Filters />
+      <Filters collectionAddress={collectionAddress} />
     </div>
   );
 };
 
-const Filters = () => {
+const Filters = ({ collectionAddress }: { collectionAddress: Address }) => {
   const params = useParams() as unknown as CollectionParams;
   const chainId = Number(params.chainId);
-  const { data: collection } = useMarketplaceCollection(params.marketplaceType);
-  const collectionAddress = getCollectionAddress({
-    collection: collection || null,
-    marketplaceType: params.marketplaceType,
-  });
   const { data: collectionData } = useCollection({
     chainId: Number(params.chainId),
-    collectionAddress: collection?.itemsAddress,
+    collectionAddress,
   });
   const isMD = useIsMinWidth('@md');
   const explorerUrl = `${networks[chainId as unknown as ChainId]?.blockExplorer?.rootUrl}address/${collectionAddress}`;
@@ -173,7 +171,11 @@ const Filters = () => {
   );
 };
 
-function FiltersModalsForSmallScreens() {
+function FiltersModalsForSmallScreens({
+  collectionAddress,
+}: {
+  collectionAddress: Address;
+}) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
   }, []);
@@ -208,7 +210,7 @@ function FiltersModalsForSmallScreens() {
 
         <div className="flex-1 overflow-auto pb-[100px]">
           <div className="p-4 pt-0">
-            <Filters />
+            <Filters collectionAddress={collectionAddress} />
           </div>
         </div>
 

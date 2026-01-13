@@ -6,8 +6,6 @@ import React, {
   useCallback,
 } from 'react';
 
-import type { Address } from 'viem';
-
 type Balance = {
   balance: {
     collectibleId: bigint;
@@ -28,11 +26,7 @@ export interface InventoryState {
 export interface InventoryContextState extends InventoryState {
   toggleListedOnly: () => void;
   setSearchText: (value: string) => void;
-  setBalance: (
-    collectionAddress: Address,
-    chainId: number,
-    balance: Balance,
-  ) => void;
+  setBalance: (key: string, balance: Balance) => void;
   setTotalCollections: (total: number) => void;
 }
 
@@ -73,39 +67,34 @@ export const InventoryProvider: React.FC<{
     }));
   }, []);
 
-  const setBalance = useCallback(
-    (collectionAddress: Address, chainId: number, balance: Balance) => {
-      setInventoryState((prev) => {
-        // Use composite key: chainId-address
-        const key = `${chainId}-${collectionAddress.toLowerCase()}`;
-        const prevCollection = prev.balances[key];
+  const setBalance = useCallback((key: string, balance: Balance) => {
+    setInventoryState((prev) => {
+      const prevCollection = prev.balances[key];
 
-        const mergedBalance = {
-          ...balance,
-          balance: prevCollection
-            ? [
-                ...prevCollection.balance.filter(
-                  (item) =>
-                    !balance.balance.some(
-                      (newItem) => newItem.collectibleId === item.collectibleId,
-                    ),
-                ),
-                ...balance.balance,
-              ]
-            : balance.balance,
-        };
+      const mergedBalance = {
+        ...balance,
+        balance: prevCollection
+          ? [
+              ...prevCollection.balance.filter(
+                (item) =>
+                  !balance.balance.some(
+                    (newItem) => newItem.collectibleId === item.collectibleId,
+                  ),
+              ),
+              ...balance.balance,
+            ]
+          : balance.balance,
+      };
 
-        return {
-          ...prev,
-          balances: {
-            ...prev.balances,
-            [key]: mergedBalance,
-          },
-        };
-      });
-    },
-    [],
-  );
+      return {
+        ...prev,
+        balances: {
+          ...prev.balances,
+          [key]: mergedBalance,
+        },
+      };
+    });
+  }, []);
 
   const setTotalCollections = useCallback((total: number) => {
     setInventoryState((prev) => ({
