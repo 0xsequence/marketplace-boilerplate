@@ -49,7 +49,14 @@ const MarketCollectionHeader = ({
     collectionAddress,
   });
 
-  const { filterOptions, searchText, showListedOnly } = useFilterState();
+  const { filterOptions, searchText, showListedOnly, priceFilters } =
+    useFilterState();
+
+  const convertedPriceFilters = priceFilters.map((filter) => ({
+    contractAddress: filter.contractAddress,
+    min: filter.min ? BigInt(filter.min) : undefined,
+    max: filter.max ? BigInt(filter.max) : undefined,
+  }));
 
   const { data: filteredCollectiblesCount } = useCountOfCollectables({
     chainId,
@@ -58,6 +65,7 @@ const MarketCollectionHeader = ({
       searchText,
       includeEmpty: !showListedOnly,
       properties: filterOptions,
+      prices: convertedPriceFilters,
     },
     side: OrderSide.listing,
   });

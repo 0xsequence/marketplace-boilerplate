@@ -12,6 +12,7 @@ import { formatPrice, OrderSide } from '@0xsequence/marketplace-sdk';
 import {
   useCountOfCollectables,
   useCurrency,
+  useFilterState,
   useFloorOrder,
 } from '@0xsequence/marketplace-sdk/react';
 import { useParams } from 'next/navigation';
@@ -28,10 +29,18 @@ const Metrics = () => {
     marketplaceType: params.marketplaceType as MarketplaceType,
   });
 
+  const { filterOptions, searchText, priceFilters } = useFilterState();
+
   const { isLoading: isTotalLoading, data: total } = useCountOfCollectables({
     chainId,
     collectionAddress,
   });
+
+  const convertedPriceFilters = priceFilters.map((filter) => ({
+    contractAddress: filter.contractAddress,
+    min: filter.min ? BigInt(filter.min) : undefined,
+    max: filter.max ? BigInt(filter.max) : undefined,
+  }));
 
   const {
     isLoading: isListedCollectiblesCountLoading,
@@ -41,6 +50,9 @@ const Metrics = () => {
     collectionAddress,
     filter: {
       includeEmpty: false,
+      searchText,
+      properties: filterOptions,
+      prices: convertedPriceFilters,
     },
     side: OrderSide.listing,
   });
