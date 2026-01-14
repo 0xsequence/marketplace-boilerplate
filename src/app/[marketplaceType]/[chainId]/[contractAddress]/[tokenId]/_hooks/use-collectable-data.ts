@@ -6,10 +6,10 @@ import type { MarketplaceType } from '~/types';
 
 import { ContractType } from '@0xsequence/marketplace-sdk';
 import {
+  useBalanceOfCollectible,
   useCollectible,
   useCollection,
   useERC721Owner,
-  useListBalances,
 } from '@0xsequence/marketplace-sdk/react/hooks';
 import { useParams } from 'next/navigation';
 import { useAccount } from 'wagmi';
@@ -47,14 +47,11 @@ export function useCollectableData() {
 
   // For ERC1155 tokens, use balance check
   const { data: erc1155Balance, isLoading: erc1155BalanceLoading } =
-    useListBalances({
+    useBalanceOfCollectible({
       chainId,
-      contractAddress: collectionAddress,
+      collectionAddress,
       tokenId,
-      accountAddress: accountAddress!,
-      query: {
-        enabled: !!collectionAddress && !!accountAddress,
-      },
+      accountAddress,
     });
 
   const isErc721 = tokenStandard === ContractType.ERC721;
@@ -68,7 +65,7 @@ export function useCollectableData() {
     ownerLoading = erc721OwnerLoading;
   } else if (isErc1155) {
     ownerData =
-      Number(erc1155Balance?.pages[0]?.balances[0]?.balance) > 0
+      erc1155Balance?.balance && Number(erc1155Balance.balance) > 0
         ? accountAddress
         : undefined;
     ownerLoading = erc1155BalanceLoading;
