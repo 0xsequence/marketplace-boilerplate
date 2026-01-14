@@ -127,6 +127,9 @@ export const ssrClient = async () => {
     showPreviewBanner = true;
   }
 
+  const isTrailsEnabled =
+    marketplaceConfig.marketplace.settings.isTrailsEnabled;
+
   return {
     marketplaceEnabled,
     builderFEUrl,
@@ -137,6 +140,7 @@ export const ssrClient = async () => {
         projectAccessKey,
         walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
         projectId: String(projectId),
+        checkoutMode: isTrailsEnabled ? 'trails' : 'crypto',
         _internal: {
           prefetchedMarketplaceSettings: marketplaceConfig,
           overrides: {
