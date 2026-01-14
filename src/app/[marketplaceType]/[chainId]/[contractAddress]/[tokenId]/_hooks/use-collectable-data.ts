@@ -51,7 +51,7 @@ export function useCollectableData() {
       chainId,
       collectionAddress,
       tokenId,
-      accountAddress,
+      userAddress: accountAddress,
     });
 
   const isErc721 = tokenStandard === ContractType.ERC721;
