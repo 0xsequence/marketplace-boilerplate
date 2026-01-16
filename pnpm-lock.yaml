@@ -48,7 +48,7 @@ importers:
         version: 2.3.39
       '@0xsequence/marketplace-sdk':
         specifier: github:0xsequence/marketplace-sdk#pre-release
-        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/db5e054fc7ac49050d5e04bf3d1a94bdb472b11e(634593ff9066c807c7e43b51f9e2e6b7)
+        version: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/2035d2e7054597f2b369a8b2647e2011c78a0860(634593ff9066c807c7e43b51f9e2e6b7)
       '@0xsequence/metadata':
         specifier: ^2.3.39
         version: 2.3.39
@@ -321,8 +321,8 @@ packages:
   '@0xsequence/indexer@3.0.0-beta.4':
     resolution: {integrity: sha512-ezuUgyYvN+F5DdS6Pn+bH7477cSGk2x71gDiV0XXuoDoh3i9OXfUsP/oaBLnf4WCLoy+3QwWAjfhel4VpDcpyA==}
 
-  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/db5e054fc7ac49050d5e04bf3d1a94bdb472b11e':
-    resolution: {tarball: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/db5e054fc7ac49050d5e04bf3d1a94bdb472b11e}
+  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/2035d2e7054597f2b369a8b2647e2011c78a0860':
+    resolution: {tarball: https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/2035d2e7054597f2b369a8b2647e2011c78a0860}
     version: 1.2.1
     peerDependencies:
       0xsequence: 2.3.38
@@ -336,7 +336,7 @@ packages:
       '@0xsequence/waas': 2.3.38
       '@google/model-viewer': 4.1.0
       '@tanstack/react-query': 5.90.9
-      nuqs: 2.7.3
+      nuqs: 2.8.6
       react: 19.2.3
       react-dom: 19.2.3
       viem: 2.41.2
@@ -6045,7 +6045,7 @@ snapshots:
 
   '@0xsequence/indexer@3.0.0-beta.4': {}
 
-  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/db5e054fc7ac49050d5e04bf3d1a94bdb472b11e(634593ff9066c807c7e43b51f9e2e6b7)':
+  '@0xsequence/marketplace-sdk@https://codeload.github.com/0xsequence/marketplace-sdk/tar.gz/2035d2e7054597f2b369a8b2647e2011c78a0860(634593ff9066c807c7e43b51f9e2e6b7)':
     dependencies:
       0xsequence: 2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       0xtrails: 0.9.5(0xsequence@2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)))(@0xsequence/api@2.3.39)(@0xsequence/metadata@2.3.39)(@0xsequence/network@2.3.39(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)))(@react-oauth/google@0.11.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@tanstack/react-query@5.90.9(react@19.2.3))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(ethers@6.16.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))(react-apple-signin-auth@1.1.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)(viem@2.41.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(wagmi@2.18.0(@tanstack/query-core@5.90.9)(@tanstack/react-query@5.90.9(react@19.2.3))(@types/react@19.2.7)(@vercel/blob@1.0.2)(bufferutil@4.1.0)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.41.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4))(zod@3.22.4)
