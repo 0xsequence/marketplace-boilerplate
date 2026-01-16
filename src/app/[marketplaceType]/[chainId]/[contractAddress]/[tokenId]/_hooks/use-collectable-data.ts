@@ -1,12 +1,12 @@
 'use client';
 
+import { use1155Balance } from '~/hooks/use-1155-balance';
 import { useMarketplaceCollection } from '~/hooks/use-marketplace-collection';
 import { getCollectionAddress } from '~/lib/utils';
 import type { MarketplaceType } from '~/types';
 
 import { ContractType } from '@0xsequence/marketplace-sdk';
 import {
-  useBalanceOfCollectible,
   useCollectible,
   useCollection,
   useERC721Owner,
@@ -46,12 +46,20 @@ export function useCollectableData() {
   });
 
   // For ERC1155 tokens, use balance check
-  const { data: erc1155Balance, isLoading: erc1155BalanceLoading } =
+  // TODO: Update useBalanceOfCollectible in marketplace-sdk when new indexer balance endpoints support tokenId filter
+  /*const { data: erc1155Balance, isLoading: erc1155BalanceLoading } =
     useBalanceOfCollectible({
       chainId,
       collectionAddress,
       tokenId,
       userAddress: accountAddress,
+    });*/
+
+  const { balance: erc1155Balance, isLoading: erc1155BalanceLoading } =
+    use1155Balance({
+      collectionAddress,
+      chainId: Number(chainId),
+      tokenId: BigInt(tokenId),
     });
 
   const isErc721 = tokenStandard === ContractType.ERC721;
@@ -65,9 +73,7 @@ export function useCollectableData() {
     ownerLoading = erc721OwnerLoading;
   } else if (isErc1155) {
     ownerData =
-      erc1155Balance?.balance && Number(erc1155Balance.balance) > 0
-        ? accountAddress
-        : undefined;
+      erc1155Balance && erc1155Balance > 0n ? accountAddress : undefined;
     ownerLoading = erc1155BalanceLoading;
   } else {
     ownerData = undefined;
@@ -90,5 +96,6 @@ export function useCollectableData() {
       data: ownerData,
       isLoading: ownerLoading,
     },
+    ownedByAccount: ownerData === accountAddress,
   };
 }

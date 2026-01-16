@@ -2,10 +2,10 @@
 
 import type { ReactNode } from 'react';
 
+import { useCollectableData } from '../../../_hooks/use-collectable-data';
 import { Button, Spinner } from '@0xsequence/design-system';
 import { type Order, OrderSide } from '@0xsequence/marketplace-sdk';
 import {
-  useBalanceOfCollectible,
   useBuyModal,
   useCancelOrder,
   useSellModal,
@@ -25,22 +25,14 @@ const OrdersTableAction = ({
   order: Order;
 }) => {
   const { address: accountAddress } = useAccount();
-  const { data: balance } = useBalanceOfCollectible({
-    tokenId,
-    collectionAddress,
-    chainId,
-    userAddress: accountAddress,
-    query: {
-      enabled: !!accountAddress,
-    },
-  });
+  const { ownedByAccount } = useCollectableData();
   const { show: showSellModal } = useSellModal();
   const { cancelOrder, isExecuting, cancellingOrderId } = useCancelOrder({
     chainId,
     collectionAddress,
   });
   const { show: openBuyModal } = useBuyModal();
-  const accountHasCollectible = !!balance?.balance || false;
+  const accountHasCollectible = ownedByAccount || false;
   const orderCreatedByAccount =
     order.createdBy === accountAddress?.toLowerCase();
   const buttonProps: {
