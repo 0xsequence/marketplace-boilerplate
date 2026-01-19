@@ -48,7 +48,7 @@ export function CollectionTitle({
 
           <CustomNetworkImage
             chainId={chainId}
-            className="w-2.5 h-2.5 rounded-full"
+            className="w-3 h-3 rounded-full"
           />
         </div>
 
