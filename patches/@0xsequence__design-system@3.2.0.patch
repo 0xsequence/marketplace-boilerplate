@@ -1,5 +1,5 @@
 diff --git a/dist/index.js b/dist/index.js
-index af93edd3aabd43817b58893bf3febb370f2b84db..0ece7edcfd5c41586b836e44b057a70b5a11c345 100644
+index 1234567890abcdef1234567890abcdef12345678..abcdef1234567890abcdef1234567890abcdef12 100644
 --- a/dist/index.js
 +++ b/dist/index.js
 @@ -110,7 +110,7 @@ var ThemeProvider = (props) => {

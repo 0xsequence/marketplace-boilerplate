@@ -21,7 +21,7 @@
     "@0xsequence/api": "^2.3.39",
     "@0xsequence/checkout": "^5.4.8",
     "@0xsequence/connect": "^5.4.8",
-    "@0xsequence/design-system": "^3.1.7",
+    "@0xsequence/design-system": "3.2.0",
     "@0xsequence/hooks": "^5.4.8",
     "@0xsequence/indexer": "^2.3.39",
     "@0xsequence/marketplace-sdk": "github:0xsequence/marketplace-sdk#pre-release",
@@ -43,7 +43,7 @@
     "fuse.js": "^7.1.0",
     "motion": "^12.23.26",
     "nanostores": "^1.1.0",
-    "next": "15.3.6",
+    "next": "15.3.8",
     "nuqs": "2.8.1",
     "quikdown": "^1.1.1",
     "radash": "^12.1.1",
@@ -75,9 +75,7 @@
   "pnpm": {
     "overrides": {
       "cross-fetch": "./fetch-override",
-      "vercel": "$vercel",
-      "@0xsequence/indexer-v2": "npm:@0xsequence/indexer@2.3.38",
-      "@0xsequence/design-system-v2": "npm:@0xsequence/design-system@2.1.11"
+      "vercel": "$vercel"
     },
     "onlyBuiltDependencies": [
       "@0xsequence/marketplace-sdk",
@@ -87,7 +85,7 @@
     ],
     "patchedDependencies": {
       "@vercel/next@4.11.0": "patches/@vercel__next@4.11.0.patch",
-      "@0xsequence/design-system@3.1.7": "patches/@0xsequence__design-system@3.1.7.patch",
+      "@0xsequence/design-system@3.2.0": "patches/@0xsequence__design-system@3.2.0.patch",
       "@0xsequence/wallet-widget@5.4.8": "patches/@0xsequence__wallet-widget@5.4.8.patch"
     }
   }

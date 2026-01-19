@@ -4,6 +4,6 @@ minimumReleaseAgeExclude:
   - '@0xtrails/*'
   - '0xtrails'
   - '0xsequence'
-  - 'next@15.3.6'
-  - '@next/env@15.3.6'
+  - 'next'
+  - '@next/env'
   - 'viem'
