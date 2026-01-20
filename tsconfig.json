@@ -51,5 +51,11 @@
     ".next/types/**/*.ts",
     "eslint.config.mjs"
   ],
-  "exclude": ["node_modules", "packages", "marketplace-sdk", "marketplace-api"]
+  "exclude": [
+    "node_modules",
+    "packages",
+    "marketplace-sdk",
+    "marketplace-api",
+    "web-sdk"
+  ]
 }

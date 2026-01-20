@@ -24,7 +24,7 @@
     "@0xsequence/design-system": "3.2.0",
     "@0xsequence/hooks": "^5.4.8",
     "@0xsequence/indexer": "^2.3.39",
-    "@0xsequence/marketplace-sdk": "github:0xsequence/marketplace-sdk#pre-release",
+    "@0xsequence/marketplace-sdk": "^2.0.0",
     "@0xsequence/metadata": "^2.3.39",
     "@0xsequence/network": "^2.3.39",
     "@0xsequence/wallet-widget": "^5.4.8",
@@ -35,31 +35,31 @@
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.18",
-    "@tanstack/react-query": "5.90.9",
-    "@tanstack/react-query-devtools": "5.91.0",
+    "@tanstack/react-query": "5.90.16",
+    "@tanstack/react-query-devtools": "5.91.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "ethers": "^6.16.0",
     "fuse.js": "^7.1.0",
-    "motion": "^12.23.26",
+    "motion": "^12.24.0",
     "nanostores": "^1.1.0",
     "next": "15.3.8",
-    "nuqs": "2.8.1",
+    "nuqs": "2.8.6",
     "quikdown": "^1.1.1",
     "radash": "^12.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-error-boundary": "^6.0.0",
+    "react-error-boundary": "^6.0.2",
     "react-virtuoso": "4.14.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "three": "0.181.2",
-    "viem": "2.41.2",
+    "viem": "2.44.4",
     "wagmi": "2.18.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.1",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -78,14 +78,12 @@
       "vercel": "$vercel"
     },
     "onlyBuiltDependencies": [
-      "@0xsequence/marketplace-sdk",
       "@tailwindcss/oxide",
       "sharp",
       "unrs-resolver"
     ],
     "patchedDependencies": {
       "@vercel/next@4.11.0": "patches/@vercel__next@4.11.0.patch",
-      "@0xsequence/design-system@3.2.0": "patches/@0xsequence__design-system@3.2.0.patch",
       "@0xsequence/wallet-widget@5.4.8": "patches/@0xsequence__wallet-widget@5.4.8.patch"
     }
   }
