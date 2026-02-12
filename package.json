@@ -19,15 +19,15 @@
   "dependencies": {
     "0xsequence": "^2.3.39",
     "@0xsequence/api": "^2.3.39",
-    "@0xsequence/checkout": "^5.4.8",
-    "@0xsequence/connect": "^5.4.8",
+    "@0xsequence/checkout": "0.0.0-20260210215314",
+    "@0xsequence/connect": "0.0.0-20260210215314",
     "@0xsequence/design-system": "3.2.0",
-    "@0xsequence/hooks": "^5.4.8",
+    "@0xsequence/hooks": "0.0.0-20260210215314",
     "@0xsequence/indexer": "^2.3.39",
     "@0xsequence/marketplace-sdk": "github:0xsequence/marketplace-sdk#pre-release",
     "@0xsequence/metadata": "^2.3.39",
     "@0xsequence/network": "^2.3.39",
-    "@0xsequence/wallet-widget": "^5.4.8",
+    "@0xsequence/wallet-widget": "0.0.0-20260210215314",
     "@databeat/tracker": "^0.9.3",
     "@google/model-viewer": "^4.1.0",
     "@nanostores/react": "^1.0.0",
@@ -84,7 +84,7 @@
     ],
     "patchedDependencies": {
       "@vercel/next@4.11.0": "patches/@vercel__next@4.11.0.patch",
-      "@0xsequence/wallet-widget@5.4.8": "patches/@0xsequence__wallet-widget@5.4.8.patch"
+      "@0xsequence/wallet-widget@0.0.0-20260210215314": "patches/@0xsequence__wallet-widget@5.4.8.patch"
     }
   }
 }
