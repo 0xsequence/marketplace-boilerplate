@@ -11,7 +11,9 @@ export function ErrorFallback({
         Failed to load collectible
       </Text>
       <Text className="text-xs text-muted mb-4 max-w-xs text-left">
-        {error.message || 'An unexpected error occurred'}
+        {error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred'}
       </Text>
       <Button
         size="xs"

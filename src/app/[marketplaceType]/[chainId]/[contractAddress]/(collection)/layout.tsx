@@ -12,9 +12,9 @@ import { MediaWrapper } from './media';
 import type { Address } from 'viem';
 
 type CollectionParams = {
-  chainId: number;
-  contractAddress: Address;
-  marketplaceType: MarketplaceType;
+  chainId: string;
+  contractAddress: string;
+  marketplaceType: string;
 };
 
 const CollectionPageLayout = async (props: {
@@ -23,13 +23,15 @@ const CollectionPageLayout = async (props: {
 }) => {
   const params = await props.params;
   const chainId = Number(params.chainId);
+  const contractAddress = params.contractAddress as Address;
+  const marketplaceType = params.marketplaceType as MarketplaceType;
   const collection = await getMarketplaceCollection({
     params: {
-      ...params,
-      contractAddress: params.contractAddress,
+      chainId,
+      contractAddress,
+      marketplaceType,
     },
   });
-  const { marketplaceType } = params;
   const collectionAddress = getCollectionAddress({
     collection,
     marketplaceType,
