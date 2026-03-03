@@ -37,6 +37,9 @@ export default async function NotFound() {
 
   try {
     marketplaceConfig = await api.lookupMarketplace(lookupMarketplaceArgs);
+    if (!marketplaceConfig) {
+      isValidMarketplaceHostname = false;
+    }
   } catch (error) {
     console.error(error);
     //TODO: we should check the error and only set this on invalid hostnames

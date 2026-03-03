@@ -41,6 +41,10 @@ export const ssrClient = async () => {
     notFound();
   }
 
+  if (!marketplaceConfig?.marketplace) {
+    notFound();
+  }
+
   const projectAccessKey =
     marketplaceConfig.marketplace.settings.accessKey ||
     process.env.PROJECT_ACCESS_KEY;
