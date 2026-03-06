@@ -7,6 +7,7 @@ import CollectionAvatar from '~/components/icons/collection-avatar';
 import CustomNetworkImage from '~/components/network-image';
 import CustomSkeleton from '~/components/skeleton';
 import { useMarketplaceCollection } from '~/hooks/use-marketplace-collection';
+import { normalizeMediaUrl } from '~/lib/image-proxy';
 import { getCollectionAddress } from '~/lib/utils';
 import type { MarketplaceType } from '~/types';
 
@@ -67,8 +68,8 @@ const MarketCollectionHeader = () => {
   });
 
   const name = sdkCollection?.name;
-  const logo = sdkCollection?.logoURI;
-  const image = sdkCollection?.extensions?.ogImage;
+  const logo = normalizeMediaUrl(sdkCollection?.logoURI);
+  const image = normalizeMediaUrl(sdkCollection?.extensions?.ogImage);
   const [imageError, setImageError] = useState(false);
 
   if (collectionError) {

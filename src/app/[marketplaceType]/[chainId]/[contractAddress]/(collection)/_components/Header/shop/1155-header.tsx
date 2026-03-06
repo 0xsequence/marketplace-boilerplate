@@ -1,6 +1,7 @@
 'use client';
 
 import { useMarketplaceCollection } from '~/hooks/use-marketplace-collection';
+import { normalizeMediaUrl } from '~/lib/image-proxy';
 import { getCollectionAddress } from '~/lib/utils';
 import type { MarketplaceType } from '~/types';
 
@@ -29,7 +30,7 @@ export function Shop1155CollectionHeader({
     collectionAddress,
   });
 
-  const collectionImage = collection?.logoURI;
+  const collectionImage = normalizeMediaUrl(collection?.logoURI);
   const tokenType = 'ERC-1155';
 
   return (

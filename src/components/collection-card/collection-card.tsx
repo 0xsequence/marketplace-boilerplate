@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import CustomNetworkImage from '~/components/network-image';
+import { normalizeMediaUrl } from '~/lib/image-proxy';
 import { type MarketCollection, type ShopCollection } from '~/lib/types';
 import { cn } from '~/lib/utils';
 import { usePreviewState } from '~/utils/preview-state-context';
@@ -68,7 +69,8 @@ export const CollectionCard = ({
     '/images/collection-banner-placeholder.png';
 
   const bannerImage =
-    collection.bannerUrl || collectionBannerPlaceholderImageUrl;
+    normalizeMediaUrl(collection.bannerUrl) ||
+    collectionBannerPlaceholderImageUrl;
 
   // if the collection is private and state is user, return null for this collection
   if (isShopCollectionPrivate && previewState === 'user') {
@@ -112,7 +114,9 @@ export const CollectionCard = ({
 
         <div className="flex absolute bottom-4 left-4 flex-col gap-3 content-end">
           <div className="flex items-center gap-2">
-            <CollectionOGImage imageUrl={collectionData?.extensions.ogImage} />
+            <CollectionOGImage
+              imageUrl={normalizeMediaUrl(collectionData?.extensions.ogImage)}
+            />
 
             <div className="flex flex-col">
               <div className="flex items-center">
