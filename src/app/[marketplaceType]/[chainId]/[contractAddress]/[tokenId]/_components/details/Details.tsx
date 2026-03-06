@@ -15,7 +15,7 @@ import { isHex } from 'viem';
 type Details = {
   'Contract Address': string;
   'Token ID': string;
-  'Token Standard': string | undefined;
+  'Token Standard'?: string;
   Blockchain: string | undefined;
   Owner?: string;
 };
@@ -32,9 +32,12 @@ export default function Details() {
   const details: Details = {
     'Contract Address': params.contractAddress as string,
     'Token ID': params.tokenId as string,
-    'Token Standard': tokenStandard,
     Blockchain: network.title,
   };
+
+  if (tokenStandard) {
+    details['Token Standard'] = tokenStandard;
+  }
 
   if (tokenStandard === ContractType.ERC721) {
     details.Owner = owner.data || 'Loading...';
