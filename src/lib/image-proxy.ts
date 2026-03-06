@@ -4,7 +4,7 @@ export const getProxyImageUrl = (
   imageUrl: string,
   width: number,
   height: number,
-  options = { crop: true },
+  _options = { crop: true },
 ): string => {
   if (!imageUrl) return '';
   // Don't proxy data URLs, local URLs, or non-image URLs

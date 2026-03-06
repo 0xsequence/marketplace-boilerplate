@@ -19,6 +19,7 @@ import {
   Button,
 } from '@0xsequence/design-system';
 import { useOpenWalletModal } from '@0xsequence/wallet-widget';
+import type { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -106,7 +107,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
 
         <DropdownButton
           className="w-full bg-background-active hover:bg-background-active/80"
-          onClick={() => router.push('/market/inventory')}
+          onClick={() => router.push('/market/inventory' as Route)}
           shape="square"
           size="sm"
         >

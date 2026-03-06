@@ -11,7 +11,7 @@ const Page = async ({
 }: {
   params: Promise<{ marketplaceType: MarketplaceType }>;
 }) => {
-  const { getMarketplaceConfig, showPreviewBanner } = await ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   const { marketplaceType } = await params;
   const isShop = marketplaceType === 'shop';
@@ -70,7 +70,7 @@ const Page = async ({
           </Text>
         </div>
       ) : (
-        <LandingPageGrid showPreviewBanner={showPreviewBanner} />
+        <LandingPageGrid showPreviewBanner={false} />
       )}
     </div>
   );

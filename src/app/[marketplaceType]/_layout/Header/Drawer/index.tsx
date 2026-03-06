@@ -149,7 +149,7 @@ const HeaderDrawerMenu = ({
         <div className="flex flex-col gap-2 border-b border-border-normal mb-4 pb-4 w-full">
           {shopEnabled && (
             <Link
-              href="/shop"
+              href={'/shop' as Route}
               onClick={() => {
                 closeHeaderDrawerMenu();
               }}
@@ -169,7 +169,7 @@ const HeaderDrawerMenu = ({
           )}
           {marketplaceEnabled && (
             <Link
-              href="/market"
+              href={'/market' as Route}
               onClick={() => {
                 closeHeaderDrawerMenu();
               }}

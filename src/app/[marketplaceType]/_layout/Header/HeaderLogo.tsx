@@ -2,6 +2,7 @@
 
 import { Text } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { Route } from 'next';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -17,7 +18,7 @@ export const LandingPageHeaderLogo = ({
   return (
     <Link
       prefetch={false}
-      href={landingPagePath}
+      href={landingPagePath as Route}
       className="flex items-center text-xl font-bold text-secondary"
     >
       {logoUrl ? (

@@ -36,7 +36,7 @@ const CollectionPageLayout = async (props: {
     collection,
     marketplaceType,
   });
-  const { getMarketplaceConfig, showPreviewBanner } = await ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
 
   const collections =
@@ -62,7 +62,7 @@ const CollectionPageLayout = async (props: {
             marketplaceType={marketplaceType}
             chainId={chainId}
             collectionAddress={collectionAddress}
-            showPreviewBanner={showPreviewBanner}
+            showPreviewBanner={false}
           />
 
           <div className="flex w-full mx-auto ">
