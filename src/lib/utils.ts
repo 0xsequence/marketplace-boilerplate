@@ -1,6 +1,10 @@
+import type { MarketplaceType } from '~/types';
+
+import type { MarketCollection, ShopCollection } from './types';
 import { networks } from '@0xsequence/network';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import type { Address } from 'viem';
 
 // example: https://example.com/example.html?test=1
 export const isHtml = (fileName: string) => {
@@ -65,3 +69,34 @@ export const getChainName = (nameOrId: ChainNameOrId) =>
   getChain(nameOrId)?.name;
 export const getChainId = (nameOrId: ChainNameOrId) =>
   getChain(nameOrId)?.chainId;
+
+export const getCollectionAddress = ({
+  collection,
+  marketplaceType,
+}: {
+  collection: MarketCollection | ShopCollection | null;
+  marketplaceType: MarketplaceType;
+}): Address => {
+  if (!collection) {
+    return '' as Address;
+  }
+
+  if (marketplaceType === 'market') {
+    return (collection as MarketCollection).itemsAddress;
+  }
+
+  if (marketplaceType === 'shop') {
+    return (collection as ShopCollection).itemsAddress;
+  }
+
+  return '' as Address;
+};
+
+export const getSaleAddress = (
+  collection: ShopCollection | null,
+): Address | undefined => {
+  if (!collection) {
+    return undefined;
+  }
+  return collection.saleAddress;
+};
