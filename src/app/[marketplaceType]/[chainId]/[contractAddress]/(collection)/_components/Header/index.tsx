@@ -7,22 +7,19 @@ export const CollectionHeader = ({
   marketplaceType,
   chainId,
   collectionAddress,
-  showPreviewBanner,
 }: {
   marketplaceType: MarketplaceType;
   chainId: number;
   collectionAddress: string;
-  showPreviewBanner: boolean;
 }) => {
   if (marketplaceType === 'shop') {
     return (
       <ShopCollectionHeader
         chainId={chainId}
         collectionAddress={collectionAddress}
-        showPreviewBanner={showPreviewBanner}
       />
     );
   }
 
-  return <MarketCollectionHeader showPreviewBanner={showPreviewBanner} />;
+  return <MarketCollectionHeader />;
 };

@@ -18,11 +18,7 @@ import { useMarketplaceConfig } from '@0xsequence/marketplace-sdk/react';
 import type { Route } from 'next';
 import { useParams } from 'next/navigation';
 
-type LandingPageGridProps = {
-  showPreviewBanner: boolean;
-};
-
-export function LandingPageGrid({ showPreviewBanner }: LandingPageGridProps) {
+export function LandingPageGrid() {
   const { marketplaceType } = useParams();
   const isShop = marketplaceType === 'shop';
   const isMarket = marketplaceType === 'market';
@@ -56,7 +52,7 @@ export function LandingPageGrid({ showPreviewBanner }: LandingPageGridProps) {
           {title}
         </h2>
 
-        {showPreviewBanner && isShop && viewState === 'admin' && (
+        {isShop && viewState === 'admin' && (
           <Select
             value={visibility}
             onValueChange={(value) =>
@@ -82,10 +78,7 @@ export function LandingPageGrid({ showPreviewBanner }: LandingPageGridProps) {
       </div>
 
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[240px] md:auto-rows-[250px] gap-3 align-center justify-center">
-        <CollectionsGrid
-          collections={collections ?? []}
-          showPreviewBanner={showPreviewBanner}
-        />
+        <CollectionsGrid collections={collections ?? []} />
       </div>
     </div>
   );
@@ -93,10 +86,8 @@ export function LandingPageGrid({ showPreviewBanner }: LandingPageGridProps) {
 
 function CollectionsGrid({
   collections,
-  showPreviewBanner,
 }: {
   collections: MarketCollection[] | ShopCollection[];
-  showPreviewBanner: boolean;
 }) {
   const { marketplaceType } = useParams();
   const isShop = marketplaceType === 'shop';
@@ -119,7 +110,6 @@ function CollectionsGrid({
         collection={collection}
         collectionAddress={collection.itemsAddress}
         salesAddress={salesAddress}
-        showPreviewBanner={showPreviewBanner}
       />
     );
   });

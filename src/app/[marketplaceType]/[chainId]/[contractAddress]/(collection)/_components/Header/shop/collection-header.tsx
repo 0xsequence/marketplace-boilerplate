@@ -35,11 +35,9 @@ const CollectionHeaderSkeleton = () => {
 export const ShopCollectionHeader = ({
   chainId,
   collectionAddress,
-  showPreviewBanner,
 }: {
   chainId: number;
   collectionAddress: string;
-  showPreviewBanner: boolean;
 }) => {
   const { contractAddress } = useParams();
   const { data: collection, isLoading: isLoadingCollection } = useCollection({
@@ -66,9 +64,7 @@ export const ShopCollectionHeader = ({
     <div
       className={cn(
         'mb-8 bg-background-primary sticky z-[11] outline-[2px] outline-background-primary my-[2px]',
-        showPreviewBanner
-          ? 'min-[300px]:top-[108px]! min-[548px]:top-[88px]!'
-          : 'top-[var(--headerHeight)]!',
+        'top-[var(--headerHeight)]!',
       )}
     >
       {isLoadingCollection || !collection ? (

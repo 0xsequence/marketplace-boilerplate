@@ -24,11 +24,7 @@ import {
 import Head from 'next/head';
 import { useParams } from 'next/navigation';
 
-const MarketCollectionHeader = ({
-  showPreviewBanner,
-}: {
-  showPreviewBanner: boolean;
-}) => {
+const MarketCollectionHeader = () => {
   const params = useParams();
   const chainId = Number(params.chainId);
   const collectionData = useMarketplaceCollection(
@@ -94,9 +90,7 @@ const MarketCollectionHeader = ({
       <div
         className={cn(
           'bg-background-primary flex-col w-full sticky z-[11] outline-[2px] outline-background-primary mb-[2px] mt-[2px]',
-          showPreviewBanner
-            ? 'min-[300px]:top-[108px]! min-[548px]:top-[88px]!'
-            : 'top-[var(--headerHeight)]',
+          'top-[var(--headerHeight)]',
         )}
       >
         <Grid.Root

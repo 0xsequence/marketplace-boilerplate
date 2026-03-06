@@ -62,7 +62,6 @@ const CollectionPageLayout = async (props: {
             marketplaceType={marketplaceType}
             chainId={chainId}
             collectionAddress={collectionAddress}
-            showPreviewBanner={false}
           />
 
           <div className="flex w-full mx-auto ">

@@ -70,7 +70,7 @@ const Page = async ({
           </Text>
         </div>
       ) : (
-        <LandingPageGrid showPreviewBanner={false} />
+        <LandingPageGrid />
       )}
     </div>
   );

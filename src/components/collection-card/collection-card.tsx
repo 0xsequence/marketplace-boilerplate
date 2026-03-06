@@ -20,7 +20,6 @@ import Link, { type LinkProps } from 'next/link';
 import type { Address } from 'viem';
 
 type CollectionCardProps = {
-  showPreviewBanner: boolean;
   collection: MarketCollection | ShopCollection;
   collectionAddress: Address;
   salesAddress?: Address;
@@ -28,7 +27,6 @@ type CollectionCardProps = {
 };
 
 export const CollectionCard = ({
-  showPreviewBanner: shouldShowVisibilityPill,
   collection,
   collectionAddress,
   salesAddress,
@@ -138,10 +136,7 @@ export const CollectionCard = ({
                 <CollectionCardVisibilityPill
                   isShopCollectionPrivate={isShopCollectionPrivate}
                   shouldShowVisibilityPill={
-                    (salesAddress &&
-                      previewState === 'admin' &&
-                      shouldShowVisibilityPill) ||
-                    false
+                    (salesAddress && previewState === 'admin') || false
                   }
                 />
               </div>

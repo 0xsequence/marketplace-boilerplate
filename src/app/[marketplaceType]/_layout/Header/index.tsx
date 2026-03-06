@@ -12,7 +12,6 @@ export const Header = async () => {
     <HeaderClient
       marketplaceConfig={marketplaceConfig}
       shopAndMarketEnabled={shopAndMarketEnabled}
-      showPreviewBanner={false}
     />
   );
 };

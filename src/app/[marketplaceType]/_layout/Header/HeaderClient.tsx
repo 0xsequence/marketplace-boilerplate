@@ -13,13 +13,11 @@ import { cn, type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 type HeaderClientProps = {
   marketplaceConfig: MarketplaceConfig;
   shopAndMarketEnabled: boolean;
-  showPreviewBanner: boolean;
 };
 
 export default function HeaderClient({
   marketplaceConfig,
   shopAndMarketEnabled,
-  showPreviewBanner,
 }: HeaderClientProps) {
   const { marketplaceEnabled } = useMarketplaceContext();
 
@@ -28,7 +26,6 @@ export default function HeaderClient({
       className={cn(
         'h-(--headerHeight) bg-background-primary flex gap-2 p-3 relative border-b border-border-normal',
         'sticky top-0 z-20 w-full',
-        showPreviewBanner ? 'top-[52px] md:top-10 min-[548px]:margin' : '',
       )}
     >
       <MenuButton />
