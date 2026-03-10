@@ -1,4 +1,5 @@
 import { ssrClient } from '../marketplace-sdk/ssr';
+import { Layout } from './_layout';
 import { type Metadata } from 'next';
 
 export default async function StoreLayout({
@@ -6,7 +7,7 @@ export default async function StoreLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <Layout>{children}</Layout>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
