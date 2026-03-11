@@ -1,4 +1,4 @@
-import { addPathnameToHeadersMiddleware } from './middleware/addPathnameToHeadersMiddleware';
+import { addPathnameToHeadersMiddleware } from './middleware/add-pathname-to-headers';
 import { redirectMarketplace } from './middleware/redirect';
 import { NextResponse, type NextRequest } from 'next/server';
 

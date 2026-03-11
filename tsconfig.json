@@ -33,20 +33,29 @@
       ],
       "$collection/*": [
         "./src/app/collection/[chainParam]/[collectionId]/[mode]/*"
-      ],
-      "@0xsequence/marketplace-sdk": ["sdk"],
-      "@0xsequence/marketplace-sdk/*": ["sdk/*"]
+      ]
     }
   },
   "include": [
     ".eslintrc.cjs",
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "environment.d.ts",
+    "model-viewer.d.ts",
+    "quikdown.d.ts",
+    "sentry.client.config.ts",
+    "*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
     "eslint.config.mjs"
   ],
-  "exclude": ["node_modules", "packages"]
+  "exclude": [
+    "node_modules",
+    "packages",
+    "marketplace-sdk",
+    "marketplace-api",
+    "web-sdk"
+  ]
 }

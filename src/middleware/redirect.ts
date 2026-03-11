@@ -5,6 +5,19 @@ import { type NextRequest, NextResponse } from 'next/server';
 export function redirectMarketplace(req: NextRequest) {
   const url = req.nextUrl;
 
+  const hostname = req.headers.get('x-forwarded-marketplace') || url.hostname;
+
+  const redirectHostnames = [
+    'dev-sequence.market',
+    'www.dev-sequence.market',
+    'sequence.market',
+    'www.sequence.market',
+  ];
+
+  if (redirectHostnames.includes(hostname)) {
+    return NextResponse.redirect('https://sequence.xyz/marketplaces');
+  }
+
   //Redirect marketplace v1 paths
   if (
     url.pathname.startsWith('/collection/') ||

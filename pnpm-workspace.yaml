@@ -1,0 +1,9 @@
+minimumReleaseAge: 20160 # If you remove or change this, you will be fired
+minimumReleaseAgeExclude:
+  - '@0xsequence/*'
+  - '@0xtrails/*'
+  - '0xtrails'
+  - '0xsequence'
+  - 'next'
+  - '@next/env'
+  - 'viem'

@@ -1,23 +1,35 @@
 import { isHtml, is3dModel, isVideo } from './utils';
 
+export const normalizeMediaUrl = (imageUrl?: string): string => {
+  if (!imageUrl) return '';
+
+  if (imageUrl.startsWith('ipfs://')) {
+    return `https://ipfs.io/ipfs/${imageUrl.slice('ipfs://'.length)}`;
+  }
+
+  return imageUrl;
+};
+
 export const getProxyImageUrl = (
   imageUrl: string,
   width: number,
   height: number,
-  options = { crop: true },
+  _options = { crop: true },
 ): string => {
-  if (!imageUrl) return '';
+  const normalizedImageUrl = normalizeMediaUrl(imageUrl);
+
+  if (!normalizedImageUrl) return '';
   // Don't proxy data URLs, local URLs, or non-image URLs
   if (
-    imageUrl.startsWith('data:') ||
-    imageUrl.startsWith('/') ||
-    isHtml(imageUrl) ||
-    isVideo(imageUrl) ||
-    is3dModel(imageUrl)
+    normalizedImageUrl.startsWith('data:') ||
+    normalizedImageUrl.startsWith('/') ||
+    isHtml(normalizedImageUrl) ||
+    isVideo(normalizedImageUrl) ||
+    is3dModel(normalizedImageUrl)
   ) {
-    return imageUrl;
+    return normalizedImageUrl;
   }
 
   // Add a custom image proxy here
-  return imageUrl;
+  return normalizedImageUrl;
 };

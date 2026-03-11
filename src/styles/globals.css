@@ -36,10 +36,6 @@
 
     --input-active: 0 0% 53%;
 
-    @media (min-width: 640px) {
-      --stickyCollectionHeaderHeight: 172px;
-    }
-
     /* Modern browsers with `scrollbar-*` support 
     @supports (scrollbar-width: auto) {
       *scrollbar-color: var(--scrollbar-color-thumb)
@@ -72,6 +68,13 @@
       --poster-color: 'transparent';
       --progress-mask: 'transparent';
     }
+  }
+}
+
+@layer utilities {
+  [data-radix-popper-content-wrapper] > div:focus-within {
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-width: 0 !important;
   }
 }
 

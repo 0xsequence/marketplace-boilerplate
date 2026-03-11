@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index 1db6d01f53f1cf851590e163c2db398205b495ce..d70af0148f4625df0982c9e9639863efd2f6786f 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -10922,7 +10922,7 @@ var import_path = require("path");
+ // src/constants.ts
+ var KIB = 1024;
+ var MIB = 1024 * KIB;
+-var EDGE_FUNCTION_SIZE_LIMIT = 4 * MIB;
++var EDGE_FUNCTION_SIZE_LIMIT = 10 * MIB;
+ var DEFAULT_MAX_UNCOMPRESSED_LAMBDA_SIZE = 250 * MIB;
+ var LAMBDA_RESERVED_UNCOMPRESSED_SIZE = 25 * MIB;
+ var INTERNAL_PAGES = ["_app.js", "_error.js", "_document.js"];
